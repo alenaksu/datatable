@@ -5,13 +5,12 @@ export default css`
     display: flex;
     align-items: flex-start;
 
-    padding: var(--spacing-medium);
-    font-family: var(--font-sans);
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-small);
-    line-height: var(--line-height-dense);
-
-    white-space: nowrap;
+    padding: var(--dt-column-header-padding);
+    font-family: var(--dt-column-header-font-family);
+    font-weight: var(--dt-column-header-font-weight);
+    font-size: var(--dt-column-header-font-size);
+    line-height: var(--dt-column-header-line-height);
+    white-space: var(--dt-column-header-white-space);
   }
 
   .container {
@@ -21,19 +20,20 @@ export default css`
     gap: var(--spacing-2x-small);
   }
 
-  .sortable {
-  }
-
   .label {
     display: flex;
     align-items: center;
-    cursor: pointer;
     text-transform: uppercase;
+  }
+
+  .sortable .label {
+    cursor: pointer;
   }
 
   .sort-icon {
     padding: var(--spacing-2x-small);
     transition: opacity ease-in-out var(--transition-fast);
+    opacity: 0;
   }
 
   .sort-icon.sorted {

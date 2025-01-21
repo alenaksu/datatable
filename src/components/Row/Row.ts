@@ -4,7 +4,7 @@ import styles from "./Row.styles";
 import { classMap } from "lit/directives/class-map.js";
 import { when } from "lit/directives/when.js";
 import { consume } from "@lit/context";
-import { TableContext, tableContext } from "../../tableContext";
+import { TableContext, tableContext } from "../../lib/tableContext";
 import chevronUp from "../../icons/chevronUp";
 import chevronDown from "../../icons/chevronDown";
 import commonStyles from "../../styles/common.styles";

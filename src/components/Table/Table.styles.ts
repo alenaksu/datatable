@@ -5,18 +5,18 @@ export default css`
   ${theme}
 
   :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
 
-    --max-table-height: 70vh;
-    --height: auto;
+    --dt-cell-padding: 1rem;
+    --dt-cell-spacing: 0rem;
   }
 
   .container {
-    max-height: var(--max-table-height);
-    height: var(--height);
     overflow: auto;
     overscroll-behavior: contain;
     position: relative;
+    flex-grow: 1;
   }
 
   .table {
@@ -47,32 +47,8 @@ export default css`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: var(--spacing-2x-large);
-    margin-top: var(--spacing-medium);
-  }
-
-  .pagination > *::part(form-control) {
-    display: flex;
-    gap: var(--spacing-small);
-    align-items: center;
-  }
-
-  .pagination > *::part(form-control-label) {
-    text-align: right;
-  }
-
-  .pagination sl-icon-button {
-    font-size: var(--font-size-x-large);
-  }
-
-  .pagination sl-select::part(display-input) {
-    max-width: 2rem;
-  }
-
-  slot[name='caption'] > dt-row,
-  slot[name='caption']::slotted(dt-row) {
-    grid-column: 1 / -1;
-    font-style: italic;
+    gap: var(--dt-table-pagination-gap);
+    margin-top: var(--dt-table-pagination-margin);
   }
 
   .head {
@@ -80,10 +56,17 @@ export default css`
     grid-template-columns: subgrid;
     grid-column: 1 / -1;
 
-    background-color: var(--color-neutral-50);
+    background-color: var(--dt-table-head-background);
 
     top: 0px;
     position: sticky;
+  }
+
+  .caption {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    font-style: var(--dt-table-caption-font-style);
   }
 
   .loader {

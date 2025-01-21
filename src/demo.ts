@@ -1,7 +1,9 @@
-import { html, LitElement } from 'lit';
-import './index';
-import { customElement, property, state } from 'lit/decorators.js';
+import { html, LitElement, PropertyValues } from 'lit';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { map } from 'lit/directives/map.js';
+import { PageChangeEvent } from './lib/events';
+import { Table } from './components/Table/Table';
+import './index';
 
 @customElement('demo-app')
 export class DemoApp extends LitElement {
@@ -14,21 +16,19 @@ export class DemoApp extends LitElement {
   @state()
   totalItems = 0;
 
-  async connectedCallback() {
-    super.connectedCallback();
-    this.loading = true;
-    const response = await fetch('https://dummyjson.com/products');
-    const { products, total } = await response.json();
-    this.data = products;
-    this.totalItems = total;
-    this.loading = false;
+  @query('dt-table')
+  table!: Table;
+
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    this.loadData();
   }
 
-  async handlePageChange(event: CustomEvent) {
+  async loadData() {
     this.loading = true;
+
     const params = new URLSearchParams();
-    const page = event.detail.page;
-    const perPage = event.detail.perPage;
+    const page = this.table.page;
+    const perPage = this.table.perPage;
     params.set('limit', perPage.toString());
     params.set('skip', ((page - 1) * perPage).toString());
 
@@ -36,21 +36,27 @@ export class DemoApp extends LitElement {
     const { products, total } = await response.json();
     this.data = products;
     this.totalItems = total;
+
     this.loading = false;
+  }
+
+  handlePageChange(event: PageChangeEvent) {
+    this.loadData();
   }
 
   render() {
     return html`
       <dt-table
         pagination
-        ?loading=${this.loading}
         expandable
         columns="min-content auto auto auto"
         totalItems=${this.totalItems}
         @pagechange="${this.handlePageChange}"
+        ?loading=${this.loading}
+        style="height: 95vh"
       >
         <dt-column>ID</dt-column>
-        <dt-column>Title</dt-column>
+        <dt-column sortable>Title</dt-column>
         <dt-column>Category</dt-column>
         <dt-column>Price</dt-column>
 

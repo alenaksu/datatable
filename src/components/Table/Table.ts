@@ -3,7 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import styles from './Table.styles.js';
 import commonStyles from '../../styles/common.styles.js';
 
-import { tableContext } from '../../tableContext.js';
+import { tableContext } from '../../lib/tableContext.js';
 import { when } from 'lit/directives/when.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { ContextProvider } from '@lit/context';
@@ -12,6 +12,13 @@ import firstPage from '../../icons/firstPage.js';
 import chevronLeft from '../../icons/chevronLeft.js';
 import chevronRight from '../../icons/chevronRight.js';
 import lastPage from '../../icons/lastPage.js';
+import {
+  ExtendableEvent,
+  FilterEvent,
+  PageChangeEvent,
+  SortEvent,
+} from '../../lib/events.js';
+import { SortDirection } from '../../types.js';
 
 @customElement('dt-table')
 export class Table extends LitElement {
@@ -42,7 +49,7 @@ export class Table extends LitElement {
   sortBy = '';
 
   @property()
-  sortDirection: 'asc' | 'desc' | string = 'asc';
+  sortDirection: SortDirection = 'asc';
 
   @property()
   columns?: string;
@@ -87,34 +94,22 @@ export class Table extends LitElement {
       behavior: 'smooth',
     });
   }
-
-  sort(by: string, direction?: 'asc' | 'desc' | string) {
+  
+  sort(by: string, direction?: SortDirection) {
     this.sortDirection =
       direction || (this.sortDirection === 'asc' ? 'desc' : 'asc');
     this.sortBy = by;
 
     this.dispatchEvent(
-      new CustomEvent('sort', {
-        detail: {
-          sortBy: this.sortBy,
-          sortDirection: this.sortDirection,
-        },
-      }),
+      new SortEvent({ sortBy: by, sortDirection: this.sortDirection }),
     );
   }
 
-  filter(filterBy: string, criteria: string | string[]) {
-    this.dispatchEvent(
-      new CustomEvent('filter', {
-        detail: {
-          filterBy,
-          criteria,
-        },
-      }),
-    );
+  filter(filterBy: string, criteria: string) {
+    this.dispatchEvent(new FilterEvent({ filterBy, criteria }));
   }
 
-  protected willUpdate(changedProperties: PropertyValueMap<Table>): void {
+  protected async willUpdate(changedProperties: PropertyValueMap<Table>) {
     if (changedProperties.has('page') || changedProperties.has('perPage')) {
       if (changedProperties.has('perPage')) {
         this.page = 1;
@@ -122,12 +117,7 @@ export class Table extends LitElement {
 
       if (this.hasUpdated) {
         this.dispatchEvent(
-          new CustomEvent('pagechange', {
-            detail: {
-              page: this.page,
-              perPage: this.perPage,
-            },
-          }),
+          new PageChangeEvent({ page: this.page, perPage: this.perPage }),
         );
       }
     }
@@ -248,16 +238,11 @@ export class Table extends LitElement {
           <slot></slot>
         </div>
 
-        <slot name="caption">
-          ${when(
-            this.isEmpty,
-            () => html`
-              <dt-row>
-                <dt-cell class="empty">No data available</dt-cell>
-              </dt-row>
-            `,
-          )}
-        </slot>
+        <div class="caption">
+          <slot name="caption">
+            ${when(this.isEmpty, () => html` No data available `)}
+          </slot>
+        </div>
       </div>
 
       ${when(this.pagination, () => this.renderPagination())}

@@ -5,10 +5,9 @@ export default css`
     display: flex;
     align-items: center;
 
-    padding: var(--spacing-medium);
-    font-size: var(--font-size-medium);
-    line-height: var(--line-height-dense);
-    white-space: nowrap;
-    vertical-align: middle;
+    padding: var(--dt-cell-padding);
+    font-size: var(--dt-cell-font-size);
+    line-height: var(--dt-cell-line-height);
+    white-space: var(--dt-cell-white-space);
   }
 `;

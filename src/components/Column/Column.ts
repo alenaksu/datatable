@@ -4,9 +4,8 @@ import styles from './Column.styles.js';
 import { when } from 'lit/directives/when.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { consume } from '@lit/context';
-import { TableContext, tableContext } from '../../tableContext.js';
+import { TableContext, tableContext } from '../../lib/tableContext.js';
 import commonStyles from '../../styles/common.styles.js';
-import sort from '../../icons/sort.js';
 import sortAsc from '../../icons/sortAsc.js';
 import sortDesc from '../../icons/sortDesc.js';
 
@@ -52,7 +51,7 @@ export class TableHeader extends LitElement {
   renderSortIcon() {
     const sorted = this.table.sortBy === this.name;
     const icon = !sorted
-      ? sort
+      ? sortAsc
       : this.table.sortDirection === 'asc'
       ? sortAsc
       : sortDesc;
