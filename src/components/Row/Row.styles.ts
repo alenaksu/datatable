@@ -19,10 +19,15 @@ export default css`
   :host([expanded]) {
   }
 
+  .expand-button {
+    padding-block: 0;
+    padding-inline: var(--dt-spacing-s);
+  }
+
   .details {
     grid-column: 1 / -1;
     overflow: hidden;
-    padding: var(--spacing-small);
+    padding: var(--dt-spacing-s);
   }
 
   .details:not(.expanded) {

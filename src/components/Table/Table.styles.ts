@@ -8,8 +8,7 @@ export default css`
     display: flex;
     flex-direction: column;
 
-    --dt-cell-padding: 1rem;
-    --dt-cell-spacing: 0rem;
+    color: var(--dt-text-1);
   }
 
   .container {
@@ -17,6 +16,29 @@ export default css`
     overscroll-behavior: contain;
     position: relative;
     flex-grow: 1;
+  }
+
+  .head {
+    animation: scroll-shadow-sticky linear forwards;
+    animation-timeline: scroll(nearest block);
+  }
+
+  @keyframes scroll-shadow-sticky {
+    /* start with no shadow */
+    0% {
+      box-shadow: none;
+    }
+
+    /* end with shadow pushing out right */
+    1% {
+      box-shadow: 0 3px 5px -2px hsl(220 40% 2% / calc(10% + 3%)),
+        0 7px 14px -5px hsl(220 40% 2% / calc(10% + 5%));
+    }
+
+    100% {
+      box-shadow: 0 3px 5px -2px hsl(220 40% 2% / calc(10% + 3%)),
+        0 7px 14px -5px hsl(220 40% 2% / calc(10% + 5%));
+    }
   }
 
   .table {
@@ -32,9 +54,7 @@ export default css`
 
     display: grid;
     grid-template-columns: var(--grid-columns);
-    text-align: left;
     width: 100%;
-    border: none;
     border-collapse: collapse;
     box-sizing: border-box;
   }
@@ -49,6 +69,7 @@ export default css`
     align-items: center;
     gap: var(--dt-table-pagination-gap);
     margin-top: var(--dt-table-pagination-margin);
+    font-family: var(--dt-table-pagination-font-family);
   }
 
   .head {
@@ -66,35 +87,15 @@ export default css`
     display: grid;
     grid-template-columns: subgrid;
     grid-column: 1 / -1;
+    padding: var(--dt-table-caption-padding);
     font-style: var(--dt-table-caption-font-style);
   }
 
   .loader {
     position: absolute;
-    width: 100%;
-    top: 0;
+    bottom: 0;
     left: 0;
-    height: 100%;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: color-mix(
-      in oklch,
-      var(--color-neutral-500),
-      transparent 20%
-    );
-  }
-
-  .spinner {
-    width: 64px;
-    height: 64px;
-    border: 2px solid var(--color-neutral-0);
-    border-bottom-color: var(--color-neutral-500);
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+    width: 100%;
   }
 
   @keyframes rotation {

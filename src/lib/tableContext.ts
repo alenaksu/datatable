@@ -6,8 +6,6 @@ export type TableContext = {
   sortDirection: SortDirection;
   sort: (by: string, direction?: SortDirection) => void;
   filter: (filterBy: string, criteria: string) => void;
-  registerColumn: (column: HTMLElement) => void;
-  unregisterColumn: (column: HTMLElement) => void;
   expandable: boolean;
 };
 

@@ -4,31 +4,47 @@ export default css`
   .icon-button {
     background: transparent;
     border: 0;
-    padding: 0;
     line-height: 0;
-    width: 24px;
-    height: 24px;
     cursor: pointer;
-    color: var(--color-neutral-600);
-    padding: var(--spacing-2x-small);
+    color: var(--dt-text-1);
+    padding: var(--dt-spacing-s);
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    transition: var(--dt-transition-fast);
   }
 
-  .icon-button > svg {
-    width: 100%;
-    height: 100%;
+  .icon-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .icon-button:hover {
+    background-color: var(--dt-primary-surface-2);
+    color: var(--dt-primary-text-1);
+  }
+
+  .icon-button:active {
+    background-color: var(--dt-primary-surface-1);
+    color: var(--dt-primary-text-1);
+  }
+
+  .icon-button > * {
+    width: var(--dt-font-size-m);
+    height: var(--dt-font-size-m);
   }
 
   input {
-    padding: var(--spacing-x-small) var(--spacing-medium);
-    border: 1px solid var(--color-neutral-200);
+    padding: var(--dt-spacing-s) var(--dt-spacing-m);
+    border: 1px solid var(--dt-surface-2);
     border-radius: 3px;
   }
 
   select {
     cursor: pointer;
-    padding: var(--spacing-x-small) var(--spacing-medium);
+    padding: var(--dt-spacing-s) var(--dt-spacing-m);
     border: 0;
-    border: 1px solid var(--color-neutral-200);
+    border: 1px solid var(--dt-surface-2);
     position: relative;
     vertical-align: middle;
     border-radius: 3px;
@@ -42,13 +58,13 @@ export default css`
 
   label > select {
     appearance: none;
-    padding-right: calc(var(--spacing-medium) + var(--spacing-2x-small) * 2 + 24px);
+    padding-right: calc(var(--dt-spacing-m) + var(--dt-spacing-xs) * 2 + 24px);
   }
 
   label:has(select) {
     display: flex;
     align-items: center;
-    gap: var(--spacing-x-small);
+    gap: var(--dt-spacing-s);
     position: relative;
   }
 
@@ -57,8 +73,8 @@ export default css`
     position: absolute;
     mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>')
       50% 50% no-repeat;
-    background: var(--color-neutral-600);
-    padding: 0 var(--spacing-2x-small);
+    background: var(--dt-surface-3);
+    padding: 0 var(--dt-spacing-xs);
     width: 24px;
     bottom: 0;
     top: 0;

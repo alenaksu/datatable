@@ -1,15 +1,17 @@
-import { LitElement, PropertyValues, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import styles from "./Row.styles";
-import { classMap } from "lit/directives/class-map.js";
-import { when } from "lit/directives/when.js";
-import { consume } from "@lit/context";
-import { TableContext, tableContext } from "../../lib/tableContext";
-import chevronUp from "../../icons/chevronUp";
-import chevronDown from "../../icons/chevronDown";
-import commonStyles from "../../styles/common.styles";
+import { LitElement, PropertyValues, html } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
+import styles from './Row.styles.js';
+import { classMap } from 'lit/directives/class-map.js';
+import { when } from 'lit/directives/when.js';
+import { consume } from '@lit/context';
+import { TableContext, tableContext } from '../../lib/tableContext.js';
+import chevronDown from '../../icons/chevronDown.js';
+import commonStyles from '../../styles/common.styles.js';
+import { ExpandChangeEvent } from '../../lib/events.js';
+import chevronRight from '../../icons/chevronRight.js';
+import { threadId } from 'worker_threads';
 
-@customElement("dt-row")
+@customElement('dt-row')
 export class TableRow extends LitElement {
   static styles = [commonStyles, styles];
 
@@ -19,13 +21,17 @@ export class TableRow extends LitElement {
   @consume({ context: tableContext })
   table!: TableContext;
 
-  protected firstUpdated(): void {
-    this.setAttribute("role", "row");
+  @state()
+  private loading = false;
+
+  constructor() {
+    super();
+    this.setAttribute('role', 'row');
   }
 
-  protected updated(changedProperties: PropertyValues): void {
-    if (changedProperties.has("expanded")) {
-      this.setAttribute("aria-expanded", String(this.expanded));
+  protected async updated(changedProperties: PropertyValues) {
+    if (changedProperties.has('expanded')) {
+      this.setAttribute('aria-expanded', String(this.expanded));
     }
   }
 
@@ -33,37 +39,65 @@ export class TableRow extends LitElement {
     return this.querySelector(':scope > [slot="details"]') !== null;
   }
 
+  private renderExpandIcon() {
+    if (this.loading) {
+      return html`<dt-spinner></dt-spinner>`;
+    }
+
+    if (this.expanded) {
+      return chevronDown;
+    } else {
+      return chevronRight;
+    }
+  }
+
+  async toggleExpanded(force?: boolean) {
+    const newExpanded = force ?? !this.expanded;
+    const expandChangeEvent = new ExpandChangeEvent({
+      expanded: newExpanded,
+    });
+    this.dispatchEvent(expandChangeEvent);
+
+    if (newExpanded) {
+      this.loading = true;
+      await expandChangeEvent.promise;
+      this.loading = false;
+    }
+
+    this.expanded = newExpanded;
+  }
+
   render() {
     return html`
       ${when(
         this.table?.expandable,
         () => html`
-          <dt-cell>
+          <dt-cell class="expand-button">
             ${when(
               this.hasDetailsSlot,
               () => html`
                 <button
                   class="icon-button"
-                  @click=${() => (this.expanded = !this.expanded)}
-                  aria-expanded=${this.expanded}
-                  aria-label=${this.expanded ? "Collapse" : "Expand"}
-                  aria-controls="details"
+                  @click="${() => this.toggleExpanded()}"
                 >
-                  ${when(this.expanded, () => chevronUp, () => chevronDown)}
-                  </button>
-              `
+                  ${this.renderExpandIcon()}
+                </button>
+              `,
             )}
           </dt-cell>
-        `
+        `,
       )}
       <slot></slot>
       ${when(
         this.table?.expandable,
         () => html`
-          <div id="details" class="${classMap({ details: true, expanded: this.expanded })}">
+          <div
+            id="details"
+            class="${classMap({ details: true, expanded: this.expanded })}"
+          >
             <slot name="details"></slot>
           </div>
-        `
+        `,
       )}
     `;
   }
@@ -71,6 +105,6 @@ export class TableRow extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "dt-row": TableRow;
+    'dt-row': TableRow;
   }
 }

@@ -25,14 +25,11 @@ export class TableHeader extends LitElement {
   @consume({ context: tableContext, subscribe: true })
   table!: TableContext;
 
-  connectedCallback(): void {
-    super.connectedCallback();
-    this.table.registerColumn(this);
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this.table.unregisterColumn(this);
+  constructor() {
+    super();
+    
+    this.slot = 'head';
+    this.setAttribute('role', 'columnheader');
   }
 
   protected updated(_changedProperties: PropertyValues): void {
@@ -41,11 +38,6 @@ export class TableHeader extends LitElement {
         throw new Error(`When setting a column as sortable or filterable, a name must be provided: ${this.outerHTML}`);
       }
     }
-  }
-
-  protected firstUpdated(): void {
-    this.slot = 'head';
-    this.setAttribute('role', 'columnheader');
   }
 
   renderSortIcon() {

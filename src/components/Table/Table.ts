@@ -1,9 +1,9 @@
 import { LitElement, PropertyValueMap, html } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import styles from './Table.styles.js';
 import commonStyles from '../../styles/common.styles.js';
 
-import { tableContext } from '../../lib/tableContext.js';
+import { TableContext, tableContext } from '../../lib/tableContext.js';
 import { when } from 'lit/directives/when.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { ContextProvider } from '@lit/context';
@@ -12,13 +12,9 @@ import firstPage from '../../icons/firstPage.js';
 import chevronLeft from '../../icons/chevronLeft.js';
 import chevronRight from '../../icons/chevronRight.js';
 import lastPage from '../../icons/lastPage.js';
-import {
-  ExtendableEvent,
-  FilterEvent,
-  PageChangeEvent,
-  SortEvent,
-} from '../../lib/events.js';
+import { FilterEvent, PageChangeEvent, SortEvent } from '../../lib/events.js';
 import { SortDirection } from '../../types.js';
+import { delayed } from '../../lib/template.js';
 
 @customElement('dt-table')
 export class Table extends LitElement {
@@ -57,56 +53,54 @@ export class Table extends LitElement {
   @query('slot:not([name])')
   defaultSlot!: HTMLSlotElement;
 
+  @query('slot[name=head]')
+  headSlot!: HTMLSlotElement;
+
   @query('.container')
   container!: HTMLDivElement;
 
-  private registeredColumns = new Set();
+  @state()
+  private columnCount = 0;
 
-  private provider = new ContextProvider(this, {
+  private provider: ContextProvider<{
+    __context__: TableContext;
+  }> = new ContextProvider(this, {
     context: tableContext,
     initialValue: this,
   });
 
-  handleBeforeClick() {
+  constructor() {
+    super();
+
+    this.setAttribute('role', 'table');
+  }
+
+  private handleBeforeClick() {
     this.page--;
   }
 
-  handleNextClick() {
+  private handleNextClick() {
     this.page++;
   }
 
-  handleFirstClick() {
+  private handleFirstClick() {
     this.page = 1;
   }
 
-  handleLastClick() {
+  private handleLastClick() {
     this.page = Math.ceil(this.totalItems / this.perPage);
   }
 
-  handleUpdate(e: Event) {
+  private handleUpdatePerPage(e: Event) {
     const target = e.target as HTMLInputElement;
     this.setAttribute(target.name, target.value);
   }
 
-  resetScroll() {
+  private resetScroll() {
     this.container.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
-  }
-  
-  sort(by: string, direction?: SortDirection) {
-    this.sortDirection =
-      direction || (this.sortDirection === 'asc' ? 'desc' : 'asc');
-    this.sortBy = by;
-
-    this.dispatchEvent(
-      new SortEvent({ sortBy: by, sortDirection: this.sortDirection }),
-    );
-  }
-
-  filter(filterBy: string, criteria: string) {
-    this.dispatchEvent(new FilterEvent({ filterBy, criteria }));
   }
 
   protected async willUpdate(changedProperties: PropertyValueMap<Table>) {
@@ -125,29 +119,41 @@ export class Table extends LitElement {
     this.notifyConsumers();
   }
 
-  registerColumn(column: HTMLElement) {
-    this.registeredColumns.add(column);
-    this.requestUpdate();
-  }
-
-  unregisterColumn(column: HTMLElement) {
-    this.registeredColumns.delete(column);
-    this.requestUpdate();
-  }
-
   private notifyConsumers() {
     this.provider.setValue(this, true);
   }
 
-  firstUpdated() {
-    this.setAttribute('role', 'table');
+  private updateColumns() {
+    this.columnCount = this.headSlot.assignedElements().length;
+  }
 
+  protected firstUpdated() {
+    this.updateColumns();
+    
     new MutationObserver(() => {
       this.resetScroll();
     }).observe(this, { childList: true, subtree: true });
   }
 
-  renderPagination() {
+  get isEmpty() {
+    return this.defaultSlot?.assignedElements().length === 0;
+  }
+
+  sort(by: string, direction?: SortDirection) {
+    this.sortDirection =
+      direction || (this.sortDirection === 'asc' ? 'desc' : 'asc');
+    this.sortBy = by;
+
+    this.dispatchEvent(
+      new SortEvent({ sortBy: by, sortDirection: this.sortDirection }),
+    );
+  }
+
+  filter(filterBy: string, criteria: string) {
+    this.dispatchEvent(new FilterEvent({ filterBy, criteria }));
+  }
+
+  private renderPagination() {
     const canBefore = this.page > 1;
     const canNext = this.page * this.perPage < this.totalItems;
 
@@ -157,7 +163,7 @@ export class Table extends LitElement {
             Items per page: 
             <select
               id="perPage"
-              @change="${this.handleUpdate}"
+              @change="${this.handleUpdatePerPage}"
               name="perPage"
               value="${this.perPage}"
             >
@@ -204,36 +210,28 @@ export class Table extends LitElement {
     `;
   }
 
-  get isEmpty() {
-    return this.defaultSlot?.assignedElements().length === 0;
-  }
-
   render() {
     return html`
       <div class="filters"></div>
 
       <div class="container">
-        ${when(
-          this.loading,
-          () => html`
-            <div class="loader">
-              <div class="spinner"></div>
-            </div>
-          `,
-        )}
         <div
           class="${classMap({
             table: true,
             expandable: this.expandable,
           })}"
           style="${styleMap({
-            '--column-count': this.registeredColumns.size,
+            '--column-count': this.columnCount,
             '--columns': this.columns,
           })}"
         >
           <div class="head">
             ${when(this.expandable, () => html`<div></div>`)}
-            <slot name="head"></slot>
+            <slot name="head" @slotchange="${this.updateColumns}"></slot>
+
+            ${when(this.loading, () =>
+              delayed(html`<dt-progress-bar class="loader"></dt-progress-bar>`),
+            )}
           </div>
           <slot></slot>
         </div>

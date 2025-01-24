@@ -1,9 +1,9 @@
 import { html, LitElement, PropertyValues } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { map } from 'lit/directives/map.js';
-import { PageChangeEvent } from './lib/events';
-import { Table } from './components/Table/Table';
-import './index';
+import { ExpandChangeEvent } from './lib/events.js';
+import { Table } from './components/Table/Table.js';
+import './index.js';
 
 @customElement('demo-app')
 export class DemoApp extends LitElement {
@@ -40,7 +40,11 @@ export class DemoApp extends LitElement {
     this.loading = false;
   }
 
-  handlePageChange(event: PageChangeEvent) {
+  protected createRenderRoot(): HTMLElement | DocumentFragment {
+    return this;
+  }
+
+  handlePageChange() {
     this.loadData();
   }
 
@@ -56,14 +60,14 @@ export class DemoApp extends LitElement {
         style="height: 95vh"
       >
         <dt-column>ID</dt-column>
-        <dt-column sortable>Title</dt-column>
+        <dt-column name="title">Title</dt-column>
         <dt-column>Category</dt-column>
         <dt-column>Price</dt-column>
 
         ${map(
           this.data,
           (item: any) => html`
-            <dt-row>
+            <dt-row @expandchange="${(event: ExpandChangeEvent) => event.waitUntil(new Promise((resolve) => setTimeout(resolve, 2000)))}">
               <dt-cell>${item.id}</dt-cell>
               <dt-cell>${item.title}</dt-cell>
               <dt-cell>${item.category}</dt-cell>

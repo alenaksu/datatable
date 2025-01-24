@@ -1,38 +1,23 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  block-size: 100%;
+  font-size: 14px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
+  line-height: 1.8;
+  -webkit-text-size-adjust: none;
+  accent-color: rgb(59, 130, 246);
+  caret-color: caret-color rgb(59, 130, 246);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
+.dense {
+  /* Spacing */
+  --dt-spacing-xs: 0.125rem;
+  --dt-spacing-s: 0.25rem;
+  --dt-spacing-m: 0.5rem;
+  --dt-spacing-l: 1rem;
+  --dt-spacing-xl: 1.25rem;
+
+  /* Line height */
+  --dt-line-height-dense: 1;
+  --dt-line-height-normal: 1.25;
+  --dt-line-height-loose: 1.5;
 }

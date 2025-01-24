@@ -14,7 +14,7 @@ interface SortEventDetail {
   sortBy: string;
   sortDirection: 'asc' | 'desc';
 }
-export class SortEvent extends ExtendableEvent<SortEventDetail> {
+export class SortEvent extends CustomEvent<SortEventDetail> {
   constructor(detail: SortEventDetail) {
     super('sort', {
       detail,
@@ -27,7 +27,7 @@ interface FilterEventDetail {
   filterBy: string;
   criteria: string;
 }
-export class FilterEvent extends ExtendableEvent<FilterEventDetail> {
+export class FilterEvent extends CustomEvent<FilterEventDetail> {
   constructor(detail: FilterEventDetail) {
     super('filter', {
       detail,
@@ -40,9 +40,21 @@ interface PageChangeEventDetail {
   page: number;
   perPage: number;
 }
-export class PageChangeEvent extends ExtendableEvent<PageChangeEventDetail> {
+export class PageChangeEvent extends CustomEvent<PageChangeEventDetail> {
   constructor(detail: PageChangeEventDetail) {
     super('pagechange', {
+      detail,
+      bubbles: true,
+    });
+  }
+}
+
+interface ExpandChangeEventDetail {
+  expanded: boolean;
+}
+export class ExpandChangeEvent extends ExtendableEvent<ExpandChangeEventDetail> {
+  constructor(detail: ExpandChangeEventDetail) {
+    super('expandchange', {
       detail,
       bubbles: true,
     });
