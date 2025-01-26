@@ -1,17 +1,26 @@
 import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import styles from './Cell.styles.js';
+import { styleMap } from 'lit/directives/style-map.js';
 
 @customElement('dt-cell')
 export class TableCell extends LitElement {
   static styles = [styles];
 
-  protected firstUpdated(): void {
+  @property({ type: Number })
+  span = 1;
+
+  constructor() {
+    super();
     this.setAttribute('role', 'cell');
   }
 
   render() {
-    return html` <slot></slot> `;
+    return html`
+      <div class="cell" style="${styleMap({ '--span': this.span })}">
+        <slot></slot>
+      </div>
+    `;
   }
 }
 

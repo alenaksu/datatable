@@ -64,10 +64,38 @@ export class DemoApp extends LitElement {
         <dt-column>Category</dt-column>
         <dt-column>Price</dt-column>
 
+        <dt-row>
+          <dt-cell>1</dt-cell>
+
+          <div slot="details">
+            <div
+              style="display: grid; grid-template-columns: repeat(11, 1fr); gap: 1rem;"
+            >
+              ${map(
+                ['neutral', 'primary', 'accent'],
+                (type) => html`
+                  ${map(
+                    [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950],
+                    (value) => html`
+                      <div
+                        style="background-color: var(--dt-color-${type}-${value}); height: 50px; width: 50px;"
+                      ></div>
+                    `,
+                  )}
+                `,
+              )}
+            </div>
+          </div>
+        </dt-row>
         ${map(
           this.data,
           (item: any) => html`
-            <dt-row @expandchange="${(event: ExpandChangeEvent) => event.waitUntil(new Promise((resolve) => setTimeout(resolve, 2000)))}">
+            <dt-row
+              @expandchange="${(event: ExpandChangeEvent) =>
+                event.waitUntil(
+                  new Promise((resolve) => setTimeout(resolve, 2000)),
+                )}"
+            >
               <dt-cell>${item.id}</dt-cell>
               <dt-cell>${item.title}</dt-cell>
               <dt-cell>${item.category}</dt-cell>

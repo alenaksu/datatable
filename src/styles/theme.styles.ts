@@ -1,31 +1,39 @@
-import { css } from 'lit';
+import { css, unsafeCSS } from 'lit';
+
+const colors = [
+  [50, 98.5],
+  [100, 97],
+  [200, 92.2],
+  [300, 87],
+  [400, 70.8],
+  [500, 55.6],
+  [600, 43.9],
+  [700, 37.1],
+  [800, 26.9],
+  [900, 20.5],
+  [950, 14.5],
+];
 
 export default css`
   :where(:host) {
-    /* Colors */
-    --dt-color-primary-50: hsl(204 100% 97.1%);
-    --dt-color-primary-100: hsl(204 93.8% 93.7%);
-    --dt-color-primary-200: hsl(200.6 94.4% 86.1%);
-    --dt-color-primary-300: hsl(199.4 95.5% 73.9%);
-    --dt-color-primary-400: hsl(198.4 93.2% 59.6%);
-    --dt-color-primary-500: hsl(198.6 88.7% 48.4%);
-    --dt-color-primary-600: hsl(200.4 98% 39.4%);
-    --dt-color-primary-700: hsl(201.3 96.3% 32.2%);
-    --dt-color-primary-800: hsl(201 90% 27.5%);
-    --dt-color-primary-900: hsl(202 80.3% 23.9%);
-    --dt-color-primary-950: hsl(202.3 73.8% 16.5%);
+    color-scheme: light;
 
-    --dt-color-neutral-50: hsl(0 0% 97.5%);
-    --dt-color-neutral-100: hsl(240 4.8% 95.9%);
-    --dt-color-neutral-200: hsl(240 5.9% 90%);
-    --dt-color-neutral-300: hsl(240 4.9% 83.9%);
-    --dt-color-neutral-400: hsl(240 5% 64.9%);
-    --dt-color-neutral-500: hsl(240 3.8% 46.1%);
-    --dt-color-neutral-600: hsl(240 5.2% 33.9%);
-    --dt-color-neutral-700: hsl(240 5.3% 26.1%);
-    --dt-color-neutral-800: hsl(240 3.7% 15.9%);
-    --dt-color-neutral-900: hsl(240 5.9% 10%);
-    --dt-color-neutral-950: hsl(240 7.3% 8%);
+    /* Colors */
+    --dt-color-primary: hsl(180, 33%, 51%);
+    --dt-color-accent: hsl(189, 100%, 77%);
+    --dt-color-neutral: hsl(0, 0%, 55%);
+
+    ${unsafeCSS(
+      colors
+        .map(
+          ([value, lightness]) => `
+          --dt-color-primary-${value}: hsl(from var(--dt-color-primary) h s ${lightness}%);
+          --dt-color-accent-${value}: hsl(from var(--dt-color-accent) h s ${lightness}%);
+          --dt-color-neutral-${value}: hsl(from var(--dt-color-neutral) h s ${lightness}%);
+        `,
+        )
+        .join('\n'),
+    )}
 
     --dt-text-1: var(--dt-color-neutral-900);
     --dt-text-2: var(--dt-color-neutral-700);
@@ -80,6 +88,9 @@ export default css`
     --dt-line-height-normal: 1.6;
     --dt-line-height-loose: 2.133;
 
+    /* Table */
+    --dt-table-background: var(--dt-surface-1);
+
     /* Pagination */
     --dt-table-pagination-gap: var(--dt-spacing-xl);
     --dt-table-pagination-margin: var(--dt-spacing-m);
@@ -126,5 +137,21 @@ export default css`
     --dt-spinner-size: 48px;
     --dt-spinner-width: 2px;
     --dt-spinner-color: var(--dt-primary-text-2);
+  }
+
+  :where(:host) {
+    color-scheme: dark;
+    ${unsafeCSS(
+      [...colors]
+        .reverse()
+        .map(
+          ([_, lightness], index) => `
+            --dt-color-primary-${colors[index][0]}: hsl(from var(--dt-color-primary) h s ${lightness}%);
+            --dt-color-accent-${colors[index][0]}: hsl(from var(--dt-color-accent) h s ${lightness}%);
+            --dt-color-neutral-${colors[index][0]}: hsl(from var(--dt-color-neutral) h s ${lightness}%);
+          `,
+        )
+        .join('\n'),
+    )}
   }
 `;

@@ -9,6 +9,7 @@ export default css`
     flex-direction: column;
 
     color: var(--dt-text-1);
+    background-color: var(--dt-surface-1);
   }
 
   .container {
@@ -60,7 +61,7 @@ export default css`
   }
 
   .table.expandable {
-    --grid-columns: min-content var(--columns);
+    --grid-columns: minmax(min-content, 50px) var(--columns);
   }
 
   .pagination {
