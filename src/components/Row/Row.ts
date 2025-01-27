@@ -9,7 +9,6 @@ import chevronDown from '../../icons/chevronDown.js';
 import commonStyles from '../../styles/common.styles.js';
 import { ExpandChangeEvent } from '../../lib/events.js';
 import chevronRight from '../../icons/chevronRight.js';
-import { threadId } from 'worker_threads';
 
 @customElement('dt-row')
 export class TableRow extends LitElement {
@@ -77,7 +76,7 @@ export class TableRow extends LitElement {
               this.hasDetailsSlot,
               () => html`
                 <button
-                  class="icon-button"
+                  class="button icon"
                   @click="${() => this.toggleExpanded()}"
                 >
                   ${this.renderExpandIcon()}

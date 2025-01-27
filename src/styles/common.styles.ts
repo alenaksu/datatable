@@ -1,42 +1,58 @@
 import { css } from 'lit';
 
 export default css`
-  .icon-button {
-    background: transparent;
-    border: 0;
-    line-height: 0;
+  .button {
     cursor: pointer;
-    color: var(--dt-text-1);
+
     padding: var(--dt-spacing-s);
+
+    border-radius: var(--dt-button-border-radius);
+    border-style: var(--dt-button-border-style);
+    border-width: var(--dt-button-border-width);
+    transition: var(--dt-button-transition);
+
+    font-family: var(--dt-button-font-family);
+    font-size: var(--dt-button-font-size);
+    font-weight: var(--dt-button-font-weight);
+    line-height: var(--dt-button-line-height);
+
+    color: var(--dt-button-color);
+    background-color: var(--dt-button-background-color);
+    border-color: var(--dt-button-border-color);
+  }
+
+  .button.icon {
     height: 40px;
     width: 40px;
     border-radius: 50%;
-    transition: var(--dt-transition-fast);
+    line-height: 0;
   }
 
-  .icon-button:disabled {
+  .button:disabled {
     cursor: not-allowed;
     opacity: 0.5;
   }
 
-  .icon-button:hover {
-    background-color: var(--dt-primary-surface-2);
-    color: var(--dt-primary-text-1);
+  .button:not(:disabled):hover {
+    background-color: var(--dt-button-hover-background-color);
+    border-color: var(--dt-button-hover-border-color);
+    color: var(--dt-button-hover-color);
   }
 
-  .icon-button:active {
-    background-color: var(--dt-primary-surface-1);
-    color: var(--dt-primary-text-1);
+  .button:not(:disabled):active {
+    background-color: var(--dt-button-active-background-color);
+    border-color: var(--dt-button-active-border-color);
+    color: var(--dt-button-active-color);
   }
 
-  .icon-button > * {
+  .button.icon > * {
     width: var(--dt-font-size-m);
     height: var(--dt-font-size-m);
   }
 
   input {
     padding: var(--dt-spacing-s) var(--dt-spacing-m);
-    border: 1px solid var(--dt-surface-2);
+    border: 1px solid var(--dt-color-neutral-100);
     border-radius: 3px;
   }
 
@@ -44,7 +60,7 @@ export default css`
     cursor: pointer;
     padding: var(--dt-spacing-s) var(--dt-spacing-m);
     border: 0;
-    border: 1px solid var(--dt-surface-2);
+    border: 1px solid var(--dt-color-neutral-100);
     position: relative;
     vertical-align: middle;
     border-radius: 3px;
@@ -73,7 +89,7 @@ export default css`
     position: absolute;
     mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>')
       50% 50% no-repeat;
-    background: var(--dt-surface-3);
+    background: var(--dt-color-neutral-400);
     padding: 0 var(--dt-spacing-xs);
     width: 24px;
     bottom: 0;

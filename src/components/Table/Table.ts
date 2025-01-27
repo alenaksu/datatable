@@ -158,7 +158,7 @@ export class Table extends LitElement {
     const canNext = this.page * this.perPage < this.totalItems;
 
     return html`
-      <div class="pagination">
+      <div class="pagination" part="pagination">
           <label for="perPage">
             Items per page: 
             <select
@@ -182,25 +182,25 @@ export class Table extends LitElement {
 
           <div>
               <button
-                class="icon-button"
+                class="button icon"
                 @click="${this.handleFirstClick}"
                 ?disabled="${!canBefore}"
               >${firstPage}</button>
             
               <button
-                class="icon-button"
+                class="button icon"
                 @click="${this.handleBeforeClick}"
                 ?disabled="${!canBefore}"
               >${chevronLeft}</button>
             
               <button
-                class="icon-button"
+                class="button icon"
                 @click="${this.handleNextClick}"
                 ?disabled="${!canNext}"
               >${chevronRight}</button>
             
               <button
-                class="icon-button"
+                class="button icon"
                 @click="${this.handleLastClick}"
                 ?disabled="${!canNext}"
               >${lastPage}</button>
@@ -224,8 +224,9 @@ export class Table extends LitElement {
             '--column-count': this.columnCount,
             '--columns': this.columns,
           })}"
+          part="table"
         >
-          <div class="head">
+          <div class="head" part="head">
             ${when(this.expandable, () => html`<div></div>`)}
             <slot name="head" @slotchange="${this.updateColumns}"></slot>
 
@@ -236,7 +237,7 @@ export class Table extends LitElement {
           <slot></slot>
         </div>
 
-        <div class="caption">
+        <div class="caption" part="caption">
           <slot name="caption">
             ${when(this.isEmpty, () => html` No data available `)}
           </slot>

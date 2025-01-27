@@ -27,7 +27,7 @@ export class TableHeader extends LitElement {
 
   constructor() {
     super();
-    
+
     this.slot = 'head';
     this.setAttribute('role', 'columnheader');
   }
@@ -35,7 +35,9 @@ export class TableHeader extends LitElement {
   protected updated(_changedProperties: PropertyValues): void {
     if (!this.name) {
       if (this.sortable || this.filterable) {
-        throw new Error(`When setting a column as sortable or filterable, a name must be provided: ${this.outerHTML}`);
+        throw new Error(
+          `When setting a column as sortable or filterable, a name must be provided: ${this.outerHTML}`,
+        );
       }
     }
   }
@@ -50,7 +52,12 @@ export class TableHeader extends LitElement {
 
     return html`
       <button
-        class="${classMap({ 'sort-icon': true, 'icon-button': true, sorted })}"
+        class="${classMap({
+          'sort-icon': true,
+          button: true,
+          icon: true,
+          sorted,
+        })}"
       >
         ${icon}
       </button>

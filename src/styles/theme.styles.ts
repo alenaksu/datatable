@@ -1,6 +1,7 @@
 import { css, unsafeCSS } from 'lit';
 
 const colors = [
+  [0, 100],
   [50, 98.5],
   [100, 97],
   [200, 92.2],
@@ -12,7 +13,9 @@ const colors = [
   [800, 26.9],
   [900, 20.5],
   [950, 14.5],
+  [1000, 0],
 ];
+const gammaAdjust = 1 // 0.995;
 
 export default css`
   :where(:host) {
@@ -24,32 +27,17 @@ export default css`
     --dt-color-neutral: hsl(0, 0%, 55%);
 
     ${unsafeCSS(
-      colors
-        .map(
-          ([value, lightness]) => `
-          --dt-color-primary-${value}: hsl(from var(--dt-color-primary) h s ${lightness}%);
-          --dt-color-accent-${value}: hsl(from var(--dt-color-accent) h s ${lightness}%);
-          --dt-color-neutral-${value}: hsl(from var(--dt-color-neutral) h s ${lightness}%);
-        `,
-        )
+      [...colors]
+        .map(([_, lightness], index) => {
+          const adjustedLightness = lightness ** gammaAdjust
+          return `
+            --dt-color-primary-${colors[index][0]}: hsl(from var(--dt-color-primary) h s ${adjustedLightness}%);
+            --dt-color-accent-${colors[index][0]}: hsl(from var(--dt-color-accent) h s ${adjustedLightness}%);
+            --dt-color-neutral-${colors[index][0]}: hsl(from var(--dt-color-neutral) h s ${adjustedLightness}%);
+          `;
+        })
         .join('\n'),
     )}
-
-    --dt-text-1: var(--dt-color-neutral-900);
-    --dt-text-2: var(--dt-color-neutral-700);
-
-    --dt-primary-text-1: var(--dt-color-primary-900);
-    --dt-primary-text-2: var(--dt-color-primary-700);
-
-    --dt-surface-1: var(--dt-color-neutral-50);
-    --dt-surface-2: var(--dt-color-neutral-100);
-    --dt-surface-3: var(--dt-color-neutral-400);
-    --dt-surface-4: var(--dt-color-neutral-600);
-
-    --dt-primary-surface-1: var(--dt-color-primary-50);
-    --dt-primary-surface-2: var(--dt-color-primary-100);
-    --dt-primary-surface-3: var(--dt-color-primary-400);
-    --dt-primary-surface-4: var(--dt-color-primary-600);
 
     /* Transition */
     --dt-transition-fast: 150ms;
@@ -89,12 +77,14 @@ export default css`
     --dt-line-height-loose: 2.133;
 
     /* Table */
-    --dt-table-background: var(--dt-surface-1);
+    --dt-table-background: var(--dt-color-neutral-0);
+    --dt-table-color: var(--dt-color-neutral-900);
 
     /* Pagination */
     --dt-table-pagination-gap: var(--dt-spacing-xl);
     --dt-table-pagination-margin: var(--dt-spacing-m);
     --dt-table-pagination-font-family: var(--dt-font-sans);
+    --dt-table-pagination-padding: var(--dt-spacing-m);
 
     /* Caption */
     --dt-table-caption-font-style: italic;
@@ -107,7 +97,7 @@ export default css`
     --dt-cell-white-space: nowrap;
 
     /* Head */
-    --dt-table-head-background: var(--dt-surface-2);
+    --dt-table-head-background: var(--dt-color-neutral-100);
 
     /* Column Header */
     --dt-column-header-padding: var(--dt-spacing-s);
@@ -115,42 +105,68 @@ export default css`
     --dt-column-header-font-weight: var(--dt-font-weight-bold);
     --dt-column-header-font-size: var(--dt-font-size-s);
     --dt-column-header-line-height: var(--dt-line-height-loose);
-    --dt-column-header-color: var(--dt-text-2);
+    --dt-column-header-color: var(--dt-color-neutral-700);
     --dt-column-header-white-space: nowrap;
 
     /* Row */
     --dt-row-background-color: transparent;
-    --dt-row-hover-background-color: var(--dt-surface-1);
+    --dt-row-hover-background-color: var(--dt-color-neutral-50);
     --dt-row-transition: background-color var(--dt-transition-fast);
-    --dt-row-border-color: var(--dt-surface-2);
+    --dt-row-border-color: var(--dt-color-neutral-100);
     --dt-row-border-width: 1px;
     --dt-row-border-style: solid;
     --dt-row-details-padding: var(--dt-spacing-s);
 
     /* Progress Bar */
-    --dt-progress-bar-color: var(--dt-text-2);
-    --dt-progress-bar-background: var(--dt-surface-1);
+    --dt-progress-bar-color: var(--dt-color-primary-500);
+    --dt-progress-bar-background: var(--dt-neutra-200);
     --dt-progress-bar-height: 4px;
     --dt-progress-bar-width: 70%;
 
     /* Spinner */
     --dt-spinner-size: 48px;
     --dt-spinner-width: 2px;
-    --dt-spinner-color: var(--dt-primary-text-2);
+    --dt-spinner-bar-color: var(--dt-color-primary-500);
+    --dt-spinner-track-color: var(--dt-color-neutral-200);
+
+    /* Button */
+    --dt-button-padding: var(--dt-spacing-s);
+    --dt-button-font-family: var(--dt-font-sans);
+    --dt-button-font-size: var(--dt-font-size-m);
+    --dt-button-font-weight: var(--dt-font-weight-semibold);
+    --dt-button-line-height: var(--dt-line-height-normal);
+    --dt-button-border-radius: 3px;
+    --dt-button-border-width: 0;
+    --dt-button-border-style: solid;
+    --dt-button-transition: var(--dt-transition-fast) background-color,
+      var(--dt-transition-fast) color, var(--dt-transition-fast) border-color;
+
+    --dt-button-background-color: transparent;
+    --dt-button-border-color: var(--dt-color-primary-700);
+    --dt-button-color: var(--dt-color-primary-700);
+
+    --dt-button-hover-background-color: var(--dt-color-primary-300);
+    --dt-button-hover-border-color: var(--dt-color-primary-400);
+    --dt-button-hover-color: var(--dt-color-primary-700);
+
+    --dt-button-active-background-color: var(--dt-color-primary-400);
+    --dt-button-active-border-color: var(--dt-color-primary-500);
+    --dt-button-active-color: var(--dt-color-primary-800);
   }
 
-  :where(:host) {
+    :where(data-theme='dark') {
     color-scheme: dark;
     ${unsafeCSS(
       [...colors]
         .reverse()
-        .map(
-          ([_, lightness], index) => `
-            --dt-color-primary-${colors[index][0]}: hsl(from var(--dt-color-primary) h s ${lightness}%);
-            --dt-color-accent-${colors[index][0]}: hsl(from var(--dt-color-accent) h s ${lightness}%);
-            --dt-color-neutral-${colors[index][0]}: hsl(from var(--dt-color-neutral) h s ${lightness}%);
-          `,
-        )
+        .map(([_, lightness], index) => {
+          const adjustedLightness = lightness ** gammaAdjust
+          return `
+            --dt-color-primary-${colors[index][0]}: hsl(from var(--dt-color-primary) h s ${adjustedLightness}%);
+            --dt-color-accent-${colors[index][0]}: hsl(from var(--dt-color-accent) h s ${adjustedLightness}%);
+            --dt-color-neutral-${colors[index][0]}: hsl(from var(--dt-color-neutral) h s ${adjustedLightness}%);
+          `;
+        })
         .join('\n'),
     )}
   }

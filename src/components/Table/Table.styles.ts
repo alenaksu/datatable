@@ -8,8 +8,8 @@ export default css`
     display: flex;
     flex-direction: column;
 
-    color: var(--dt-text-1);
-    background-color: var(--dt-surface-1);
+    color: var(--dt-table-color);
+    background-color: var(--dt-table-background);
   }
 
   .container {
@@ -70,6 +70,7 @@ export default css`
     align-items: center;
     gap: var(--dt-table-pagination-gap);
     margin-top: var(--dt-table-pagination-margin);
+    padding: var(--dt-table-pagination-padding);
     font-family: var(--dt-table-pagination-font-family);
   }
 

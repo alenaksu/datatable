@@ -27,7 +27,7 @@ export default css`
   .details {
     grid-column: 1 / -1;
     overflow: hidden;
-    padding: var(--dt-spacing-s);
+    padding: var(--dt-spacing-m);
   }
 
   .details:not(.expanded) {
