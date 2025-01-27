@@ -29,8 +29,11 @@ export class DemoApp extends LitElement {
     const params = new URLSearchParams();
     const page = this.table.page;
     const perPage = this.table.perPage;
+
     params.set('limit', perPage.toString());
     params.set('skip', ((page - 1) * perPage).toString());
+    params.set('sortBy', this.table.sortBy);
+    params.set('order', this.table.sortDirection);
 
     const response = await fetch(`https://dummyjson.com/products?${params}`);
     const { products, total } = await response.json();
@@ -56,13 +59,14 @@ export class DemoApp extends LitElement {
         columns="min-content auto auto auto"
         totalItems=${this.totalItems}
         @pagechange="${this.handlePageChange}"
+        @sortchange="${this.loadData}"
         ?loading=${this.loading}
         style="height: 95vh"
       >
-        <dt-column>ID</dt-column>
-        <dt-column name="title">Title</dt-column>
-        <dt-column>Category</dt-column>
-        <dt-column>Price</dt-column>
+        <dt-column name="id" sortable>ID</dt-column>
+        <dt-column name="title" sortable>Title</dt-column>
+        <dt-column name="category" sortable>Category</dt-column>
+        <dt-column name="price" sortable>Price</dt-column>
 
         <dt-row>
           <dt-cell>1</dt-cell>

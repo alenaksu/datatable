@@ -31,7 +31,7 @@ export default css`
     }
 
     /* end with shadow pushing out right */
-    1% {
+    10% {
       box-shadow: 0 3px 5px -2px hsl(220 40% 2% / calc(10% + 3%)),
         0 7px 14px -5px hsl(220 40% 2% / calc(10% + 5%));
     }
@@ -83,6 +83,7 @@ export default css`
 
     top: 0px;
     position: sticky;
+    align-items: flex-start;
   }
 
   .caption {

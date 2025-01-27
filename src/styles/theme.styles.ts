@@ -15,21 +15,21 @@ const colors = [
   [950, 14.5],
   [1000, 0],
 ];
-const gammaAdjust = 1 // 0.995;
+const gammaAdjust = 1; // 0.995;
 
 export default css`
   :where(:host) {
     color-scheme: light;
 
     /* Colors */
-    --dt-color-primary: hsl(180, 33%, 51%);
+    --dt-color-primary: hsl(201, 100%, 28.8%);
     --dt-color-accent: hsl(189, 100%, 77%);
     --dt-color-neutral: hsl(0, 0%, 55%);
 
     ${unsafeCSS(
       [...colors]
         .map(([_, lightness], index) => {
-          const adjustedLightness = lightness ** gammaAdjust
+          const adjustedLightness = lightness ** gammaAdjust;
           return `
             --dt-color-primary-${colors[index][0]}: hsl(from var(--dt-color-primary) h s ${adjustedLightness}%);
             --dt-color-accent-${colors[index][0]}: hsl(from var(--dt-color-accent) h s ${adjustedLightness}%);
@@ -77,7 +77,7 @@ export default css`
     --dt-line-height-loose: 2.133;
 
     /* Table */
-    --dt-table-background: var(--dt-color-neutral-0);
+    --dt-table-background: var(--dt-color-neutral-50);
     --dt-table-color: var(--dt-color-neutral-900);
 
     /* Pagination */
@@ -97,7 +97,7 @@ export default css`
     --dt-cell-white-space: nowrap;
 
     /* Head */
-    --dt-table-head-background: var(--dt-color-neutral-100);
+    --dt-table-head-background: var(--dt-color-neutral-200);
 
     /* Column Header */
     --dt-column-header-padding: var(--dt-spacing-s);
@@ -143,31 +143,33 @@ export default css`
 
     --dt-button-background-color: transparent;
     --dt-button-border-color: var(--dt-color-primary-700);
-    --dt-button-color: var(--dt-color-primary-700);
+    --dt-button-color: var(--dt-color-primary-800);
 
     --dt-button-hover-background-color: var(--dt-color-primary-300);
     --dt-button-hover-border-color: var(--dt-color-primary-400);
-    --dt-button-hover-color: var(--dt-color-primary-700);
+    --dt-button-hover-color: var(--dt-color-primary-800);
 
     --dt-button-active-background-color: var(--dt-color-primary-400);
     --dt-button-active-border-color: var(--dt-color-primary-500);
-    --dt-button-active-color: var(--dt-color-primary-800);
+    --dt-button-active-color: var(--dt-color-primary-900);
   }
 
-    :where(data-theme='dark') {
-    color-scheme: dark;
-    ${unsafeCSS(
-      [...colors]
-        .reverse()
-        .map(([_, lightness], index) => {
-          const adjustedLightness = lightness ** gammaAdjust
-          return `
-            --dt-color-primary-${colors[index][0]}: hsl(from var(--dt-color-primary) h s ${adjustedLightness}%);
-            --dt-color-accent-${colors[index][0]}: hsl(from var(--dt-color-accent) h s ${adjustedLightness}%);
-            --dt-color-neutral-${colors[index][0]}: hsl(from var(--dt-color-neutral) h s ${adjustedLightness}%);
-          `;
-        })
-        .join('\n'),
-    )}
+  @media (prefers-color-scheme: dark) {
+    :where(:host) {
+      color-scheme: dark;
+      ${unsafeCSS(
+        [...colors]
+          .reverse()
+          .map(([_, lightness], index) => {
+            const adjustedLightness = lightness ** gammaAdjust;
+            return `
+              --dt-color-primary-${colors[index][0]}: hsl(from var(--dt-color-primary) h s ${adjustedLightness}%);
+              --dt-color-accent-${colors[index][0]}: hsl(from var(--dt-color-accent) h s ${adjustedLightness}%);
+              --dt-color-neutral-${colors[index][0]}: hsl(from var(--dt-color-neutral) h s ${adjustedLightness}%);
+            `;
+          })
+          .join('\n'),
+      )}
+    }
   }
 `;

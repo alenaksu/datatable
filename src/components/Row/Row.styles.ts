@@ -24,6 +24,13 @@ export default css`
     padding-inline: var(--dt-spacing-s);
   }
 
+  .loader {
+    height: 40px;
+    width: 40px;
+    padding: var(--dt-spacing-s);
+    box-sizing: border-box;
+  }
+
   .details {
     grid-column: 1 / -1;
     overflow: hidden;

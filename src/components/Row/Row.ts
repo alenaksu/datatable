@@ -39,15 +39,7 @@ export class TableRow extends LitElement {
   }
 
   private renderExpandIcon() {
-    if (this.loading) {
-      return html`<dt-spinner></dt-spinner>`;
-    }
-
-    if (this.expanded) {
-      return chevronDown;
-    } else {
-      return chevronRight;
-    }
+    return this.expanded ? chevronDown : chevronRight;
   }
 
   async toggleExpanded(force?: boolean) {
@@ -73,7 +65,7 @@ export class TableRow extends LitElement {
         () => html`
           <dt-cell class="expand-button">
             ${when(
-              this.hasDetailsSlot,
+              this.hasDetailsSlot && !this.loading,
               () => html`
                 <button
                   class="button icon"
@@ -83,6 +75,7 @@ export class TableRow extends LitElement {
                 </button>
               `,
             )}
+            ${when(this.loading, () => html` <dt-spinner class="loader"></dt-spinner> `)}
           </dt-cell>
         `,
       )}

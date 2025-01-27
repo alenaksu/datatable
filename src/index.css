@@ -5,8 +5,6 @@ body {
     'Noto Sans', sans-serif;
   line-height: 1.8;
   -webkit-text-size-adjust: none;
-  color-accent: rgb(59, 130, 246);
-  caret-color: caret-color rgb(59, 130, 246);
 }
 
 .dense {

@@ -12,7 +12,11 @@ import firstPage from '../../icons/firstPage.js';
 import chevronLeft from '../../icons/chevronLeft.js';
 import chevronRight from '../../icons/chevronRight.js';
 import lastPage from '../../icons/lastPage.js';
-import { FilterEvent, PageChangeEvent, SortEvent } from '../../lib/events.js';
+import {
+  FilterChangeEvent,
+  PageChangeEvent,
+  SortChangeEvent,
+} from '../../lib/events.js';
 import { SortDirection } from '../../types.js';
 import { delayed } from '../../lib/template.js';
 
@@ -129,7 +133,7 @@ export class Table extends LitElement {
 
   protected firstUpdated() {
     this.updateColumns();
-    
+
     new MutationObserver(() => {
       this.resetScroll();
     }).observe(this, { childList: true, subtree: true });
@@ -140,17 +144,22 @@ export class Table extends LitElement {
   }
 
   sort(by: string, direction?: SortDirection) {
-    this.sortDirection =
-      direction || (this.sortDirection === 'asc' ? 'desc' : 'asc');
+    if (this.sortBy === by) {
+      this.sortDirection =
+        direction || (this.sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      this.sortDirection = direction || 'asc';
+    }
+
     this.sortBy = by;
 
     this.dispatchEvent(
-      new SortEvent({ sortBy: by, sortDirection: this.sortDirection }),
+      new SortChangeEvent({ sortBy: by, sortDirection: this.sortDirection }),
     );
   }
 
   filter(filterBy: string, criteria: string) {
-    this.dispatchEvent(new FilterEvent({ filterBy, criteria }));
+    this.dispatchEvent(new FilterChangeEvent({ filterBy, criteria }));
   }
 
   private renderPagination() {

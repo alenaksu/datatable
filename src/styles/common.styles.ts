@@ -61,6 +61,7 @@ export default css`
     padding: var(--dt-spacing-s) var(--dt-spacing-m);
     border: 0;
     border: 1px solid var(--dt-color-neutral-100);
+    background: none;
     position: relative;
     vertical-align: middle;
     border-radius: 3px;

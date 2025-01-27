@@ -8,6 +8,7 @@ import { TableContext, tableContext } from '../../lib/tableContext.js';
 import commonStyles from '../../styles/common.styles.js';
 import sortAsc from '../../icons/sortAsc.js';
 import sortDesc from '../../icons/sortDesc.js';
+import sort from '../../icons/sort.js';
 
 @customElement('dt-column')
 export class TableHeader extends LitElement {
@@ -45,40 +46,42 @@ export class TableHeader extends LitElement {
   renderSortIcon() {
     const sorted = this.table.sortBy === this.name;
     const icon = !sorted
-      ? sortAsc
+      ? sort
       : this.table.sortDirection === 'asc'
       ? sortAsc
-      : sortDesc;
+      : this.table.sortDirection === 'desc'
+      ? sortDesc
+      : undefined;
 
     return html`
-      <button
+      <div
         class="${classMap({
           'sort-icon': true,
-          button: true,
-          icon: true,
           sorted,
         })}"
       >
         ${icon}
-      </button>
+      </div>
     `;
   }
 
   renderFilter() {
     return html`
-      <slot name="filter">
-        <div class="filter-input">
-          <input
-            type="text"
-            name="${this.filterable!}"
-            @change=${(e: Event) =>
-              this.table.filter(
-                this.name,
-                (e.target as HTMLInputElement).value,
-              )}
-          />
-        </div>
-      </slot>
+      <div class="filter">
+        <slot name="filter">
+          <div class="filter-input">
+            <input
+              type="text"
+              name="${this.filterable!}"
+              @change=${(e: Event) =>
+                this.table.filter(
+                  this.name,
+                  (e.target as HTMLInputElement).value,
+                )}
+            />
+          </div>
+        </slot>
+      </div>
     `;
   }
 

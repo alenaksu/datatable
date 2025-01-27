@@ -10,26 +10,26 @@ export class ExtendableEvent<T = any> extends CustomEvent<T> {
   }
 }
 
-interface SortEventDetail {
+interface SortChangeEventDetail {
   sortBy: string;
   sortDirection: 'asc' | 'desc';
 }
-export class SortEvent extends CustomEvent<SortEventDetail> {
-  constructor(detail: SortEventDetail) {
-    super('sort', {
+export class SortChangeEvent extends CustomEvent<SortChangeEventDetail> {
+  constructor(detail: SortChangeEventDetail) {
+    super('sortchange', {
       detail,
       bubbles: true,
     });
   }
 }
 
-interface FilterEventDetail {
+interface FilterChangeEventDetail {
   filterBy: string;
   criteria: string;
 }
-export class FilterEvent extends CustomEvent<FilterEventDetail> {
-  constructor(detail: FilterEventDetail) {
-    super('filter', {
+export class FilterChangeEvent extends CustomEvent<FilterChangeEventDetail> {
+  constructor(detail: FilterChangeEventDetail) {
+    super('filterchange', {
       detail,
       bubbles: true,
     });

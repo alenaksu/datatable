@@ -5,8 +5,7 @@ export default css`
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    gap: var(--dt-spacing-xs);
-    padding: var(--dt-column-header-padding);
+    
     height: 100%;
     box-sizing: border-box;
   }
@@ -15,38 +14,50 @@ export default css`
     display: flex;
     align-items: center;
     height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    text-transform: uppercase;
 
     gap: var(--dt-spacing-xs);
     color: var(--dt-column-header-color);
+    padding: var(--dt-column-header-padding);
     font-family: var(--dt-column-header-font-family);
     font-weight: var(--dt-column-header-font-weight);
     font-size: var(--dt-column-header-font-size);
     line-height: var(--dt-column-header-line-height);
     white-space: var(--dt-column-header-white-space);
-
-    text-transform: uppercase;
-    
   }
 
   .sortable .label {
     cursor: pointer;
   }
 
+  .sortable .label:hover {
+    background-color: var(--dt-color-neutral-200);
+  }
+
   .sort-icon {
+    line-height: 0;
+  }
+
+  .sort-icon > svg {
+    width: 14px;
+    height: 14px;
     transition: opacity ease-in-out var(--dt-transition-fast);
-    opacity: 0;
+    opacity: 0.2;
   }
 
-  .sort-icon.sorted {
+  .sort-icon.sorted > svg {
+    opacity: 1;
+    fill: var(--dt-color-neutral-700);
+  }
+
+  .label:hover .sort-icon > svg {
     opacity: 1;
   }
 
-  .label:hover .sort-icon.sorted {
-    color: var(--dt-color-neutral-700);
-  }
-
-  .label:hover .sort-icon {
-    opacity: 1;
+  .filter {
+    padding: var(--dt-column-header-padding);
   }
 
   .filter-input {
