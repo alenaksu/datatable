@@ -1,21 +1,41 @@
 import { css, unsafeCSS } from 'lit';
 
 const colors = [
-  [0, 100],
-  [50, 98.5],
-  [100, 97],
-  [200, 92.2],
-  [300, 87],
-  [400, 70.8],
-  [500, 55.6],
-  [600, 43.9],
-  [700, 37.1],
-  [800, 26.9],
-  [900, 20.5],
-  [950, 14.5],
-  [1000, 0],
+  [0, 1, 0],
+  [50, 0.96, 0.02],
+  [100, 0.93, 0.04],
+  [200, 0.87, 0.07],
+  [300, 0.79, 0.11],
+  [400, 0.68, 0.17],
+  [500, 0.59, 0.23],
+  [600, 0.5, 0.28],
+  [700, 0.48, 0.29],
+  [800, 0.43, 0.24],
+  [900, 0.38, 0.18],
+  [950, 0.26, 0.12],
+  [1000, 0, 0],
 ];
-const gammaAdjust = 1; // 0.995;
+
+const generateSwatches = (colors: number[][]) =>
+  [...colors]
+    .map(
+      ([_, l, c], index) => `
+    --dt-color-primary-${
+      colors[index][0]
+    }: oklch(from var(--dt-color-primary) ${(l * 100).toFixed(
+        1,
+      )}% calc(min(${c}, c)) h);
+    --dt-color-accent-${colors[index][0]}: oklch(from var(--dt-color-accent) ${(
+        l * 100
+      ).toFixed(1)}% calc(min(${c}, c)) h);
+    --dt-color-neutral-${
+      colors[index][0]
+    }: oklch(from var(--dt-color-neutral) ${(l * 100).toFixed(
+        1,
+      )}% calc(min(${c}, c)) h);
+  `,
+    )
+    .join('\n');
 
 export default css`
   :where(:host) {
@@ -26,18 +46,7 @@ export default css`
     --dt-color-accent: hsl(189, 100%, 77%);
     --dt-color-neutral: hsl(0, 0%, 55%);
 
-    ${unsafeCSS(
-      [...colors]
-        .map(([_, lightness], index) => {
-          const adjustedLightness = lightness ** gammaAdjust;
-          return `
-            --dt-color-primary-${colors[index][0]}: hsl(from var(--dt-color-primary) h s ${adjustedLightness}%);
-            --dt-color-accent-${colors[index][0]}: hsl(from var(--dt-color-accent) h s ${adjustedLightness}%);
-            --dt-color-neutral-${colors[index][0]}: hsl(from var(--dt-color-neutral) h s ${adjustedLightness}%);
-          `;
-        })
-        .join('\n'),
-    )}
+    ${unsafeCSS(generateSwatches(colors))}
 
     /* Transition */
     --dt-transition-fast: 150ms;
@@ -77,7 +86,7 @@ export default css`
     --dt-line-height-loose: 2.133;
 
     /* Table */
-    --dt-table-background: var(--dt-color-neutral-50);
+    --dt-table-background: var(--dt-color-neutral-0);
     --dt-table-color: var(--dt-color-neutral-900);
 
     /* Pagination */
@@ -155,21 +164,9 @@ export default css`
   }
 
   @media (prefers-color-scheme: dark) {
-    :where(:host) {
+    :host {
       color-scheme: dark;
-      ${unsafeCSS(
-        [...colors]
-          .reverse()
-          .map(([_, lightness], index) => {
-            const adjustedLightness = lightness ** gammaAdjust;
-            return `
-              --dt-color-primary-${colors[index][0]}: hsl(from var(--dt-color-primary) h s ${adjustedLightness}%);
-              --dt-color-accent-${colors[index][0]}: hsl(from var(--dt-color-accent) h s ${adjustedLightness}%);
-              --dt-color-neutral-${colors[index][0]}: hsl(from var(--dt-color-neutral) h s ${adjustedLightness}%);
-            `;
-          })
-          .join('\n'),
-      )}
+      ${unsafeCSS(generateSwatches([...colors].reverse()))}
     }
   }
 `;

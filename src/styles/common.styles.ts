@@ -52,7 +52,7 @@ export default css`
 
   input {
     padding: var(--dt-spacing-s) var(--dt-spacing-m);
-    border: 1px solid var(--dt-color-neutral-100);
+    border: 1px solid var(--dt-color-neutral-200);
     border-radius: 3px;
   }
 
@@ -60,7 +60,8 @@ export default css`
     cursor: pointer;
     padding: var(--dt-spacing-s) var(--dt-spacing-m);
     border: 0;
-    border: 1px solid var(--dt-color-neutral-100);
+    border: 1px solid var(--dt-color-neutral-200);
+    color: var(--dt-color-neutral-900);
     background: none;
     position: relative;
     vertical-align: middle;
