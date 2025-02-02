@@ -238,12 +238,16 @@ export class Table extends LitElement {
           <div class="head" part="head">
             ${when(this.expandable, () => html`<div></div>`)}
             <slot name="head" @slotchange="${this.updateColumns}"></slot>
-
-            ${when(this.loading, () =>
-              delayed(html`<dt-progress-bar class="loader"></dt-progress-bar>`),
-            )}
           </div>
           <slot></slot>
+
+          ${when(this.loading, () =>
+            delayed(html`
+              <div class="s-loader">
+                <dt-spinner></dt-spinner>
+              </div>
+            `, 300),
+          )}
         </div>
 
         <div class="caption" part="caption">

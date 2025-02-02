@@ -22,10 +22,13 @@ export default css`
   }
 
   .button.icon {
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
     line-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .button:disabled {

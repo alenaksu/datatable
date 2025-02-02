@@ -25,8 +25,8 @@ export default css`
   }
 
   .loader {
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     padding: var(--dt-spacing-s);
     box-sizing: border-box;
   }

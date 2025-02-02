@@ -21,7 +21,7 @@ export default css`
     height: var(--dt-progress-bar-height);
     background: var(--dt-progress-bar-color);
     box-sizing: border-box;
-    animation: progress-animation 2s cubic-bezier(0.44, 0, 0.56, 1) infinite;
+    animation: progress-animation 2.5s cubic-bezier(0.7, 0, 0.2, 1) infinite;
   }
 
   @keyframes progress-animation {

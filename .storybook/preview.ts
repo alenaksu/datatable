@@ -1,4 +1,7 @@
-import type { Preview } from '@storybook/web-components';
+import { Preview, setCustomElementsManifest } from '@storybook/web-components';
+import customElementsManifest from '../custom-elements.json' assert { type: 'json' };
+
+setCustomElementsManifest(customElementsManifest);
 
 const preview: Preview = {
   parameters: {

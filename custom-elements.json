@@ -1,0 +1,780 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/Cell/Cell.styles.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/components/Cell/Cell.styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/Cell/Cell.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TableCell",
+          "members": [
+            {
+              "kind": "field",
+              "name": "span",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "span"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "span",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "span"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "dt-cell",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TableCell",
+          "declaration": {
+            "name": "TableCell",
+            "module": "src/components/Cell/Cell.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "dt-cell",
+          "declaration": {
+            "name": "TableCell",
+            "module": "src/components/Cell/Cell.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ProgressBar/ProgressBar.styles.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/components/ProgressBar/ProgressBar.styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/ProgressBar/ProgressBar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "ProgressBar",
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "dt-progress-bar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ProgressBar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "src/components/ProgressBar/ProgressBar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "dt-progress-bar",
+          "declaration": {
+            "name": "ProgressBar",
+            "module": "src/components/ProgressBar/ProgressBar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/Spinner/Spinner.styles.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/components/Spinner/Spinner.styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/Spinner/Spinner.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Spinner",
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "dt-spinner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "src/components/Spinner/Spinner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "dt-spinner",
+          "declaration": {
+            "name": "Spinner",
+            "module": "src/components/Spinner/Spinner.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/Table/Table.styles.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/components/Table/Table.styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/Table/Table.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Table",
+          "members": [
+            {
+              "kind": "field",
+              "name": "selection",
+              "type": {
+                "text": "'none' | 'single' | 'multiple'"
+              },
+              "default": "'none'",
+              "attribute": "selection"
+            },
+            {
+              "kind": "field",
+              "name": "pagination",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "pagination"
+            },
+            {
+              "kind": "field",
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "page"
+            },
+            {
+              "kind": "field",
+              "name": "perPage",
+              "type": {
+                "text": "number"
+              },
+              "default": "10",
+              "attribute": "perPage"
+            },
+            {
+              "kind": "field",
+              "name": "totalItems",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "attribute": "totalItems"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "expandable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "expandable"
+            },
+            {
+              "kind": "field",
+              "name": "sortBy",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "attribute": "sortBy"
+            },
+            {
+              "kind": "field",
+              "name": "sortDirection",
+              "type": {
+                "text": "SortDirection"
+              },
+              "default": "'asc'",
+              "attribute": "sortDirection"
+            },
+            {
+              "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "columns"
+            },
+            {
+              "kind": "field",
+              "name": "defaultSlot",
+              "type": {
+                "text": "HTMLSlotElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "headSlot",
+              "type": {
+                "text": "HTMLSlotElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "container",
+              "type": {
+                "text": "HTMLDivElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "columnCount",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "provider",
+              "type": {
+                "text": "ContextProvider<{\n    __context__: TableContext;\n  }>"
+              },
+              "privacy": "private",
+              "default": "new ContextProvider(this, { context: tableContext, initialValue: this, })"
+            },
+            {
+              "kind": "method",
+              "name": "handleBeforeClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleNextClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleFirstClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleLastClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleUpdatePerPage",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "resetScroll",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "notifyConsumers",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "updateColumns",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "isEmpty",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "sort",
+              "parameters": [
+                {
+                  "name": "by",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "direction",
+                  "optional": true,
+                  "type": {
+                    "text": "SortDirection"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "filter",
+              "parameters": [
+                {
+                  "name": "filterBy",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "criteria",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderPagination",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "PageChangeEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "selection",
+              "type": {
+                "text": "'none' | 'single' | 'multiple'"
+              },
+              "default": "'none'",
+              "fieldName": "selection"
+            },
+            {
+              "name": "pagination",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "pagination"
+            },
+            {
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "page"
+            },
+            {
+              "name": "perPage",
+              "type": {
+                "text": "number"
+              },
+              "default": "10",
+              "fieldName": "perPage"
+            },
+            {
+              "name": "totalItems",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "fieldName": "totalItems"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "loading"
+            },
+            {
+              "name": "expandable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "expandable"
+            },
+            {
+              "name": "sortBy",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "fieldName": "sortBy"
+            },
+            {
+              "name": "sortDirection",
+              "type": {
+                "text": "SortDirection"
+              },
+              "default": "'asc'",
+              "fieldName": "sortDirection"
+            },
+            {
+              "name": "columns",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "columns"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "dt-table",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Table",
+          "declaration": {
+            "name": "Table",
+            "module": "src/components/Table/Table.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "dt-table",
+          "declaration": {
+            "name": "Table",
+            "module": "src/components/Table/Table.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/Column/Column.styles.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/components/Column/Column.styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/Column/Column.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TableHeader",
+          "members": [
+            {
+              "kind": "field",
+              "name": "sortable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "sortable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "filterable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "filterable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "table",
+              "type": {
+                "text": "TableContext"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderSortIcon"
+            },
+            {
+              "kind": "method",
+              "name": "renderFilter"
+            },
+            {
+              "kind": "field",
+              "name": "slot",
+              "type": {
+                "text": "string"
+              },
+              "default": "'head'"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "sortable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "sortable"
+            },
+            {
+              "name": "filterable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "filterable"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "name"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "dt-column",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TableHeader",
+          "declaration": {
+            "name": "TableHeader",
+            "module": "src/components/Column/Column.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "dt-column",
+          "declaration": {
+            "name": "TableHeader",
+            "module": "src/components/Column/Column.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/Row/Row.styles.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "module": "src/components/Row/Row.styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/Row/Row.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TableRow",
+          "members": [
+            {
+              "kind": "field",
+              "name": "expanded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "expanded",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "table",
+              "type": {
+                "text": "TableContext"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "hasDetailsSlot",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "renderExpandIcon",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "toggleExpanded",
+              "parameters": [
+                {
+                  "name": "force",
+                  "optional": true,
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "expanded",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "expanded"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "dt-row",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TableRow",
+          "declaration": {
+            "name": "TableRow",
+            "module": "src/components/Row/Row.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "dt-row",
+          "declaration": {
+            "name": "TableRow",
+            "module": "src/components/Row/Row.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

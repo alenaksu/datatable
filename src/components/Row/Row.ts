@@ -8,7 +8,7 @@ import { TableContext, tableContext } from '../../lib/tableContext.js';
 import chevronDown from '../../icons/chevronDown.js';
 import commonStyles from '../../styles/common.styles.js';
 import { ExpandChangeEvent } from '../../lib/events.js';
-import chevronRight from '../../icons/chevronRight.js';
+import chevronUp from '../../icons/chevronUp.js';
 
 @customElement('dt-row')
 export class TableRow extends LitElement {
@@ -39,7 +39,7 @@ export class TableRow extends LitElement {
   }
 
   private renderExpandIcon() {
-    return this.expanded ? chevronDown : chevronRight;
+    return this.expanded ? chevronUp : chevronDown;
   }
 
   async toggleExpanded(force?: boolean) {

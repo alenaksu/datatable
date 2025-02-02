@@ -106,7 +106,7 @@ export default css`
     --dt-cell-white-space: nowrap;
 
     /* Head */
-    --dt-table-head-background: var(--dt-color-neutral-200);
+    --dt-table-head-background: var(--dt-color-neutral-100);
 
     /* Column Header */
     --dt-column-header-padding: var(--dt-spacing-s);

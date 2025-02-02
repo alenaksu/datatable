@@ -8,7 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "storybook": "storybook dev -p 8080 --quiet --loglevel error",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "analyze": "cem analyze --litelement",
+    "analyze:watch": "npm run analyze -- --watch"
   },
   "dependencies": {
     "@lit/context": "^1.1.3",
@@ -16,6 +18,8 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.4",
+    "@custom-elements-manifest/analyzer": "^0.10.4",
+    "@storybook/addon-a11y": "^8.5.3",
     "@storybook/addon-essentials": "^8.5.2",
     "@storybook/blocks": "^8.5.2",
     "@storybook/test": "^8.5.2",
@@ -25,5 +29,6 @@
     "storybook": "^8.5.2",
     "typescript": "~5.6.2",
     "vite": "^6.0.5"
-  }
+  },
+  "customElements": "custom-element.json"
 }
