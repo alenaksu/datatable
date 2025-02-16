@@ -1,35 +1,39 @@
 import { css, unsafeCSS } from 'lit';
 
-const colors = [
-  [0, 1, 0],
-  [50, 0.96, 0.02],
-  [100, 0.93, 0.04],
-  [200, 0.87, 0.07],
-  [300, 0.79, 0.11],
-  [400, 0.68, 0.17],
-  [500, 0.59, 0.23],
-  [600, 0.5, 0.28],
-  [700, 0.48, 0.29],
-  [800, 0.43, 0.24],
-  [900, 0.38, 0.18],
-  [950, 0.26, 0.12],
-  [1000, 0, 0],
+const swatches = [
+  0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 1000,
 ];
 
-const generateSwatches = (colors: number[][]) =>
+const colors = [
+  [1, 0],
+  [0.96, 0.02],
+  [0.93, 0.04],
+  [0.87, 0.07],
+  [0.79, 0.11],
+  [0.68, 0.17],
+  [0.59, 0.23],
+  [0.5, 0.28],
+  [0.48, 0.29],
+  [0.43, 0.24],
+  [0.38, 0.18],
+  [0.26, 0.12],
+  [0, 0],
+];
+
+const generateSwatches = (swatches: number[], colors: number[][]) =>
   [...colors]
     .map(
-      ([_, l, c], index) => `
+      ([l, c], index) => `
     --dt-color-primary-${
-      colors[index][0]
+      swatches[index]
     }: oklch(from var(--dt-color-primary) ${(l * 100).toFixed(
         1,
       )}% calc(min(${c}, c)) h);
-    --dt-color-accent-${colors[index][0]}: oklch(from var(--dt-color-accent) ${(
+    --dt-color-accent-${swatches[index]}: oklch(from var(--dt-color-accent) ${(
         l * 100
       ).toFixed(1)}% calc(min(${c}, c)) h);
     --dt-color-neutral-${
-      colors[index][0]
+      swatches[index]
     }: oklch(from var(--dt-color-neutral) ${(l * 100).toFixed(
         1,
       )}% calc(min(${c}, c)) h);
@@ -46,7 +50,7 @@ export default css`
     --dt-color-accent: hsl(189, 100%, 77%);
     --dt-color-neutral: hsl(0, 0%, 55%);
 
-    ${unsafeCSS(generateSwatches(colors))}
+    ${unsafeCSS(generateSwatches(swatches, colors))}
 
     /* Transition */
     --dt-transition-fast: 150ms;
@@ -86,7 +90,7 @@ export default css`
     --dt-line-height-loose: 2.133;
 
     /* Table */
-    --dt-table-background: var(--dt-color-neutral-0);
+    --dt-table-background: var(--dt-color-neutral-50);
     --dt-table-color: var(--dt-color-neutral-900);
 
     /* Pagination */
@@ -106,7 +110,7 @@ export default css`
     --dt-cell-white-space: nowrap;
 
     /* Head */
-    --dt-table-head-background: var(--dt-color-neutral-100);
+    --dt-table-head-background: var(--dt-color-neutral-200);
 
     /* Column Header */
     --dt-column-header-padding: var(--dt-spacing-s);
@@ -182,9 +186,9 @@ export default css`
   }
 
   @media (prefers-color-scheme: dark) {
-    :host {
+    :where(:host) {
       color-scheme: dark;
-      ${unsafeCSS(generateSwatches([...colors].reverse()))}
+      ${unsafeCSS(generateSwatches([...swatches].reverse(), colors))}
     }
   }
 `;
