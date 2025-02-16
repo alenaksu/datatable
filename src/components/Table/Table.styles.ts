@@ -7,6 +7,7 @@ export default css`
   :host {
     display: flex;
     flex-direction: column;
+    position: relative;
 
     color: var(--dt-table-color);
     background-color: var(--dt-table-background);
@@ -73,6 +74,11 @@ export default css`
     margin-top: var(--dt-table-pagination-margin);
     padding: var(--dt-table-pagination-padding);
     font-family: var(--dt-table-pagination-font-family);
+  }
+
+  .controls {
+    display: flex;
+    gap: var(--dt-table-controls-gap);
   }
 
   .head {

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/web-components';
-import { useState } from '@storybook/preview-api';
 import { html } from 'lit';
 
 import sampleData from './sampleData.js';

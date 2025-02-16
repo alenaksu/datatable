@@ -189,7 +189,7 @@ export class Table extends LitElement {
             ${this.totalItems}
           </div>
 
-          <div>
+          <div class="controls">
               <button
                 class="button icon"
                 @click="${this.handleFirstClick}"
@@ -239,15 +239,8 @@ export class Table extends LitElement {
             ${when(this.expandable, () => html`<div></div>`)}
             <slot name="head" @slotchange="${this.updateColumns}"></slot>
           </div>
-          <slot></slot>
 
-          ${when(this.loading, () =>
-            delayed(html`
-              <div class="s-loader">
-                <dt-spinner></dt-spinner>
-              </div>
-            `, 300),
-          )}
+          <slot @slotchange="${() => this.requestUpdate()}"></slot>
         </div>
 
         <div class="caption" part="caption">
@@ -257,6 +250,16 @@ export class Table extends LitElement {
         </div>
       </div>
 
+      ${when(this.loading, () =>
+        delayed(
+          html`
+            <div class="s-loader">
+              <dt-spinner></dt-spinner>
+            </div>
+          `,
+          300,
+        ),
+      )}
       ${when(this.pagination, () => this.renderPagination())}
     `;
   }

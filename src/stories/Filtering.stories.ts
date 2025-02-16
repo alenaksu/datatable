@@ -5,37 +5,44 @@ import { html } from 'lit';
 import sampleData from './sampleData.js';
 
 import '../index.js';
+import { FilterChangeEvent } from '../lib/events.js';
+
+interface TableProps {}
 
 const meta = {
-  title: 'Examples/Basic',
+  title: 'Examples/Filtering',
   component: 'dt-table',
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
-  render: ({ pagination, loading }) => {
-    const [data, setData] = useState(
-      pagination ? sampleData.slice(0, 10) : sampleData,
-    );
+  render: ({}) => {
+    const [data, setData] = useState([...sampleData]);
 
-    const handlePageChange = async (event: CustomEvent) => {
-      const { page, perPage } = event.detail;
+    const handleFilterChange = async (event: FilterChangeEvent) => {
+      const { criteria, filterBy } = event.detail;
 
-      setData(sampleData.slice((page - 1) * perPage, page * perPage));
+      if (!criteria) {
+        setData(sampleData);
+        return;
+      }
+
+      setData(
+        sampleData.slice().filter((item) => {
+          item[Number(filterBy)].toLowerCase().includes(criteria.toLowerCase());
+        }),
+      );
     };
 
     return html`
       <dt-table
-        ?loading="${loading}"
-        ?pagination="${pagination}"
-        @pagechange="${handlePageChange}"
+        @filterchange="${handleFilterChange}"
         totalItems="${sampleData.length}"
-        style="height: 400px"
       >
-        <dt-column>Name</dt-column>
-        <dt-column>Position</dt-column>
-        <dt-column>Office</dt-column>
-        <dt-column>Age</dt-column>
-        <dt-column>Start date</dt-column>
-        <dt-column>Salary</dt-column>
+        <dt-column name="0" filterable>Name</dt-column>
+        <dt-column name="1" filterable>Position</dt-column>
+        <dt-column name="2" filterable>Office</dt-column>
+        <dt-column name="3" filterable>Age</dt-column>
+        <dt-column name="4" filterable>Start date</dt-column>
+        <dt-column name="5" filterable>Salary</dt-column>
 
         ${data.map(
           ([name, position, office, age, startDate, salary, details]) => html`
@@ -46,8 +53,6 @@ const meta = {
               <dt-cell>${age}</dt-cell>
               <dt-cell>${startDate}</dt-cell>
               <dt-cell>${salary}</dt-cell>
-
-              <div slot="details">${details}</div>
             </dt-row>
           `,
         )}
@@ -57,20 +62,10 @@ const meta = {
   args: {},
 } satisfies Meta;
 
-export const Default: StoryObj = {
+type Story = StoryObj<TableProps>;
+
+export const Default: Story = {
   args: {},
-};
-
-export const Pagination: StoryObj = {
-  args: {
-    pagination: true,
-  },
-};
-
-export const Loading: StoryObj = {
-  args: {
-    loading: true,
-  },
 };
 
 export default meta;

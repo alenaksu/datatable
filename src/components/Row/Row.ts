@@ -5,10 +5,9 @@ import { classMap } from 'lit/directives/class-map.js';
 import { when } from 'lit/directives/when.js';
 import { consume } from '@lit/context';
 import { TableContext, tableContext } from '../../lib/tableContext.js';
-import chevronDown from '../../icons/chevronDown.js';
 import commonStyles from '../../styles/common.styles.js';
 import { ExpandChangeEvent } from '../../lib/events.js';
-import chevronUp from '../../icons/chevronUp.js';
+import chevronRight from '../../icons/chevronRight.js';
 
 @customElement('dt-row')
 export class TableRow extends LitElement {
@@ -38,10 +37,6 @@ export class TableRow extends LitElement {
     return this.querySelector(':scope > [slot="details"]') !== null;
   }
 
-  private renderExpandIcon() {
-    return this.expanded ? chevronUp : chevronDown;
-  }
-
   async toggleExpanded(force?: boolean) {
     const newExpanded = force ?? !this.expanded;
     const expandChangeEvent = new ExpandChangeEvent({
@@ -49,7 +44,7 @@ export class TableRow extends LitElement {
     });
     this.dispatchEvent(expandChangeEvent);
 
-    if (newExpanded) {
+    if (newExpanded && expandChangeEvent.expanded) {
       this.loading = true;
       await expandChangeEvent.promise;
       this.loading = false;
@@ -63,7 +58,12 @@ export class TableRow extends LitElement {
       ${when(
         this.table?.expandable,
         () => html`
-          <dt-cell class="expand-button">
+          <dt-cell
+            class="${classMap({
+              'expand-button': true,
+              expanded: this.expanded,
+            })}"
+          >
             ${when(
               this.hasDetailsSlot && !this.loading,
               () => html`
@@ -71,11 +71,14 @@ export class TableRow extends LitElement {
                   class="button icon"
                   @click="${() => this.toggleExpanded()}"
                 >
-                  ${this.renderExpandIcon()}
+                  ${chevronRight}
                 </button>
               `,
             )}
-            ${when(this.loading, () => html` <dt-spinner class="loader"></dt-spinner> `)}
+            ${when(
+              this.loading,
+              () => html` <dt-spinner class="loader"></dt-spinner> `,
+            )}
           </dt-cell>
         `,
       )}
@@ -83,10 +86,7 @@ export class TableRow extends LitElement {
       ${when(
         this.table?.expandable,
         () => html`
-          <div
-            id="details"
-            class="${classMap({ details: true, expanded: this.expanded })}"
-          >
+          <div class="${classMap({ details: true, expanded: this.expanded })}">
             <slot name="details"></slot>
           </div>
         `,

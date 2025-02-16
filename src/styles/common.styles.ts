@@ -6,6 +6,8 @@ export default css`
 
     padding: var(--dt-spacing-s);
 
+    outline: inherit;
+
     border-radius: var(--dt-button-border-radius);
     border-style: var(--dt-button-border-style);
     border-width: var(--dt-button-border-width);
@@ -54,21 +56,23 @@ export default css`
   }
 
   input {
-    padding: var(--dt-spacing-s) var(--dt-spacing-m);
-    border: 1px solid var(--dt-color-neutral-200);
-    border-radius: 3px;
+    padding: var(--dt-input-padding);
+    border: var(--dt-input-border-width) var(--dt-input-border-style)
+      var(--dt-input-border-color);
+    border-radius: var(--dt-input-border-radius);
+    background-color: var(--dt-input-background-color);
+    color: var(--dt-input-color);
   }
 
   select {
     cursor: pointer;
-    padding: var(--dt-spacing-s) var(--dt-spacing-m);
-    border: 0;
-    border: 1px solid var(--dt-color-neutral-200);
-    color: var(--dt-color-neutral-900);
-    background: none;
-    position: relative;
-    vertical-align: middle;
-    border-radius: 3px;
+    padding: var(--dt-select-padding);
+    border-width: var(--dt-select-border-width);
+    border-style: var(--dt-select-border-style);
+    border-color: var(--dt-select-border-color);
+    border-radius: var(--dt-select-border-radius);
+    background-color: var(--dt-select-background-color);
+    color: var(--dt-select-color);
   }
 
   select:disabled {

@@ -5,6 +5,10 @@ export class ExtendableEvent<T = any> extends CustomEvent<T> {
     this.promises.push(promise);
   }
 
+  get expanded() {
+    return !!this.promises.length;
+  }
+
   get promise() {
     return Promise.all(this.promises);
   }

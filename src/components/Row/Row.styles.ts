@@ -24,6 +24,14 @@ export default css`
     padding-inline: var(--dt-spacing-s);
   }
 
+  .expand-button button {
+    transition: transform var(--dt-transition-fast);
+  }
+
+  .expand-button.expanded button {
+    transform: rotate(90deg);
+  }
+
   .loader {
     height: 30px;
     width: 30px;
