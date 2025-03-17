@@ -158,7 +158,7 @@ export default css`
     --dt-button-border-color: var(--dt-color-primary-700);
     --dt-button-color: var(--dt-color-netrual-800);
 
-    --dt-button-hover-background-color: var(--dt-color-primary-100);
+    --dt-button-hover-background-color: var(--dt-color-neutral-100);
     --dt-button-hover-border-color: var(--dt-color-primary-400);
     --dt-button-hover-color: var(--dt-color-primary-800);
 
@@ -172,7 +172,7 @@ export default css`
     --dt-input-border-style: solid;
     --dt-input-border-color: var(--dt-color-neutral-200);
     --dt-input-border-radius: 3px;
-    --dt-iinput-background-color: var(--dt-color-neutral-0);
+    --dt-input-background-color: var(--dt-color-neutral-50);
     --dt-input-color: var(--dt-color-neutral-900);
 
     /* Select */
@@ -181,7 +181,7 @@ export default css`
     --dt-select-border-style: solid;
     --dt-select-border-color: var(--dt-color-neutral-200);
     --dt-select-border-radius: 3px;
-    --dt-select-background-color: var(--dt-color-neutral-0);
+    --dt-select-background-color: var(--dt-color-neutral-50);
     --dt-select-color: var(--dt-color-neutral-900);
   }
 

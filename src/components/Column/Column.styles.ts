@@ -50,7 +50,7 @@ export default css`
 
   .sort-icon.sorted > svg {
     opacity: 1;
-    fill: var(--dt-color-neutral-700);
+    fill: var(--dt-color-neutral-800);
   }
 
   .label:hover .sort-icon > svg {
