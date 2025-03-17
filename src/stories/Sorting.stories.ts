@@ -49,7 +49,7 @@ const meta = {
         <dt-column name="5" sortable>Salary</dt-column>
 
         ${data.map(
-          ([name, position, office, age, startDate, salary, details]) => html`
+          ([name, position, office, age, startDate, salary, _details]) => html`
             <dt-row>
               <dt-cell>${name}</dt-cell>
               <dt-cell>${position}</dt-cell>
