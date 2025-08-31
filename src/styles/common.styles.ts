@@ -98,7 +98,7 @@ export default css`
     position: absolute;
     mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>')
       50% 50% no-repeat;
-    background: var(--dt-color-neutral-400);
+    background: color-mix(in srgb, currentColor 50%, transparent 0%);
     padding: 0 var(--dt-spacing-xs);
     width: 24px;
     bottom: 0;

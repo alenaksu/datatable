@@ -5,6 +5,10 @@ import { ExpandChangeEvent } from './lib/events.js';
 import { Table } from './components/Table/Table.js';
 import './index.js';
 
+import { registerTheme } from './index.js';
+
+registerTheme();
+
 @customElement('demo-app')
 export class DemoApp extends LitElement {
   @property({ type: Boolean })

@@ -1,9 +1,6 @@
 import { css } from 'lit';
-import theme from '../../styles/theme.styles.js';
 
 export default css`
-  ${theme}
-
   :host {
     display: flex;
     flex-direction: column;
