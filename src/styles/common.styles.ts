@@ -51,8 +51,8 @@ export default css`
   }
 
   .button.icon > * {
-    width: var(--dt-button-icon-size);
-    height: var(--dt-button-icon-size);
+    width: 100%;
+    height: 100%;
   }
 
   input {
