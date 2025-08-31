@@ -7,12 +7,13 @@
   "module": "dist/datatable.js",
   "exports": {
     ".": {
-      "import": "./dist/datatable.js"
+      "import": "./dist/datatable.js",
+      "types": "./dist/datatable.d.ts"
     }
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && tsup",
     "prepare": "npm run build && npm run analyze",
     "preview": "vite preview",
     "storybook": "storybook dev -p 8080 --quiet --loglevel error",
@@ -38,6 +39,7 @@
     "@types/node": "^22.10.10",
     "semantic-release": "^24.2.3",
     "storybook": "^8.5.2",
+    "tsup": "^8.5.0",
     "typescript": "~5.6.2",
     "vite": "^6.0.5"
   },
