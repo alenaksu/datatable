@@ -35,7 +35,7 @@ export default css`
   .loader {
     height: 30px;
     width: 30px;
-    padding: var(--dt-spacing-s);
+    padding: var(--dt-button-padding);
     box-sizing: border-box;
   }
 
