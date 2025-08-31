@@ -5,19 +5,20 @@ const swatches = [
 ];
 
 const colors = [
-  [1, 0],
-  [0.96, 0.02],
-  [0.93, 0.04],
-  [0.87, 0.07],
-  [0.79, 0.11],
-  [0.68, 0.17],
-  [0.59, 0.23],
-  [0.5, 0.28],
-  [0.48, 0.29],
-  [0.43, 0.24],
-  [0.38, 0.18],
-  [0.26, 0.12],
-  [0, 0],
+  // [Lightness, Chroma]
+  [1, 0],         // Swatch 0 (White)
+  [0.975, 0.03],  // Swatch 50
+  [0.94, 0.06],   // Swatch 100
+  [0.88, 0.10],   // Swatch 200
+  [0.82, 0.14],   // Swatch 300
+  [0.74, 0.18],   // Swatch 400
+  [0.66, 0.22],   // Swatch 500 (Peak Chroma ✨)
+  [0.58, 0.21],   // Swatch 600
+  [0.50, 0.18],   // Swatch 700
+  [0.42, 0.14],   // Swatch 800
+  [0.34, 0.10],   // Swatch 900
+  [0.26, 0.07],   // Swatch 950
+  [0, 0],         // Swatch 1000 (Black)
 ];
 
 const generateSwatches = (swatches: number[], colors: number[][]) =>
@@ -42,7 +43,7 @@ const generateSwatches = (swatches: number[], colors: number[][]) =>
     .join('\n');
 
 export default css`
-  :where(:host) {
+  :where(:root), :host {
     color-scheme: light;
 
     /* Colors */
@@ -110,7 +111,7 @@ export default css`
     --dt-cell-white-space: nowrap;
 
     /* Head */
-    --dt-table-head-background: var(--dt-color-neutral-200);
+    --dt-table-head-background: var(--dt-color-neutral-100);
 
     /* Column Header */
     --dt-column-header-padding: var(--dt-spacing-s);
@@ -118,7 +119,7 @@ export default css`
     --dt-column-header-font-weight: var(--dt-font-weight-bold);
     --dt-column-header-font-size: var(--dt-font-size-s);
     --dt-column-header-line-height: var(--dt-line-height-loose);
-    --dt-column-header-color: var(--dt-color-neutral-700);
+    --dt-column-header-color: var(--dt-color-neutral-900);
     --dt-column-header-white-space: nowrap;
 
     /* Row */
@@ -186,7 +187,7 @@ export default css`
   }
 
   @media (prefers-color-scheme: dark) {
-    :where(:host) {
+    :where(:root), :host {
       color-scheme: dark;
       ${unsafeCSS(generateSwatches([...swatches].reverse(), colors))}
     }
