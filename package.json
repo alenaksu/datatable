@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "prepare": "npm run build",
     "preview": "vite preview",
     "storybook": "storybook dev -p 8080 --quiet --loglevel error",
     "build-storybook": "storybook build",
