@@ -3,6 +3,13 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "main": "dist/datatable.js",
+  "module": "dist/datatable.js",
+  "exports": {
+    ".": {
+      "import": "./dist/datatable.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
