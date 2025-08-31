@@ -1,5 +1,5 @@
 export default {
   globs: ['src/components/**/*.ts'],
-  outdir: '.',
+  outdir: './dist',
   litelement: true,
 };
