@@ -117,6 +117,7 @@ export const registerTheme = () => {
       --dt-table-head-background: var(--dt-color-neutral-100);
 
       /* Column Header */
+      --dt-column-header-gap: var(--dt-spacing-xs);
       --dt-column-header-padding: var(--dt-spacing-m);
       --dt-column-header-font-family: var(--dt-font-sans);
       --dt-column-header-font-weight: var(--dt-font-weight-bold);
@@ -125,6 +126,7 @@ export const registerTheme = () => {
       --dt-column-header-color: var(--dt-color-neutral-900);
       --dt-column-header-hover-color: var(--dt-color-neutral-200);
       --dt-column-header-white-space: nowrap;
+      --dt-column-header-input-padding: var(--dt-spacing-s);
 
       /* Row */
       --dt-row-background-color: transparent;
@@ -137,7 +139,7 @@ export const registerTheme = () => {
 
       /* Progress Bar */
       --dt-progress-bar-color: var(--dt-color-primary-500);
-      --dt-progress-bar-background: var(--dt-neutra-200);
+      --dt-progress-bar-background: var(--dt-neutral-200);
       --dt-progress-bar-height: 4px;
       --dt-progress-bar-width: 70%;
 

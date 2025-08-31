@@ -4,7 +4,7 @@ export default css`
   .button {
     cursor: pointer;
 
-    padding: var(--dt-spacing-s);
+    padding: var(--dt-button-padding);
 
     outline: inherit;
 

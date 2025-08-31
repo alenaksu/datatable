@@ -19,7 +19,7 @@ export default css`
     box-sizing: border-box;
     text-transform: uppercase;
 
-    gap: var(--dt-spacing-xs);
+    gap: var(--dt-column-header-gap);
     color: var(--dt-column-header-color);
     padding: var(--dt-column-header-padding);
     font-family: var(--dt-column-header-font-family);
@@ -66,8 +66,8 @@ export default css`
   }
 
   .filter-input > input {
-    padding: var(--dt-spacing-s);
-    padding-left: calc(var(--dt-spacing-s) + 24px);
+    padding: var(--dt-column-header-input-padding);
+    padding-left: calc(var(--dt-column-header-input-padding) + 24px);
   }
 
   .filter-input::before {
@@ -80,7 +80,7 @@ export default css`
     left: 0;
     top: 0;
     bottom: 0;
-    margin: var(--dt-spacing-s);
+    margin: var(--dt-column-header-input-padding);
     aspect-ratio: 1 / 1;
   }
 `;
