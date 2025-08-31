@@ -20,7 +20,6 @@ export default css`
   .head {
     animation: scroll-shadow-sticky linear forwards;
     animation-timeline: scroll(nearest block);
-    z-index: 1;
   }
 
   @keyframes scroll-shadow-sticky {
