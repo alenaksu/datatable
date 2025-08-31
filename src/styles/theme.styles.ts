@@ -171,6 +171,8 @@ export const registerTheme = () => {
       --dt-button-active-border-color: var(--dt-color-primary-500);
       --dt-button-active-color: var(--dt-color-primary-900);
 
+      --dt-button-icon-size: var(--dt-font-size-m);
+
       /* Input */
       --dt-input-padding: var(--dt-spacing-s);
       --dt-input-border-width: 1px;

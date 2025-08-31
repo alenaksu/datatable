@@ -51,8 +51,8 @@ export default css`
   }
 
   .button.icon > * {
-    width: var(--dt-font-size-m);
-    height: var(--dt-font-size-m);
+    width: var(--dt-button-icon-size);
+    height: var(--dt-button-icon-size);
   }
 
   input {
