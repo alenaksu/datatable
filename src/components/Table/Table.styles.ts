@@ -87,6 +87,7 @@ export default css`
     top: 0px;
     position: sticky;
     align-items: flex-start;
+    z-index: 1;
   }
 
   .caption {

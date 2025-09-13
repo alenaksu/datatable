@@ -19,6 +19,7 @@ import {
 } from '../../lib/events.js';
 import { SortDirection } from '../../types.js';
 import { delayed } from '../../lib/template.js';
+import { map } from 'lit/directives/map.js';
 
 @customElement('dt-table')
 export class Table extends LitElement {
@@ -174,12 +175,16 @@ export class Table extends LitElement {
               id="perPage"
               @change="${this.handleUpdatePerPage}"
               name="perPage"
-              value="${this.perPage}"
             >
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="100">100</option>
+            ${map(
+              [5, 10, 25, 100],
+              (n) =>
+                html`
+                  <option ?selected=${this.perPage === n} value="${n}">
+                    ${n}
+                  </option>
+                `,
+            )}
             </select>
           </label>
 
@@ -243,11 +248,15 @@ export class Table extends LitElement {
           <slot @slotchange="${() => this.requestUpdate()}"></slot>
         </div>
 
-        <div class="caption" part="caption">
-          <slot name="caption">
-            ${when(this.isEmpty, () => html` No data available `)}
-          </slot>
-        </div>
+        ${when(
+          this.isEmpty ||
+            this.querySelector(`:scope > [slot="caption"]`) !== null,
+          () => html`
+            <div class="caption" part="caption">
+              <slot name="caption"> No data available </slot>
+            </div>
+          `,
+        )}
       </div>
 
       ${when(this.loading, () =>
