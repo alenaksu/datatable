@@ -68,13 +68,16 @@ export class TableHeader extends LitElement {
   renderFilter() {
     return html`
       <div class="filter">
-        <slot
-          name="filter"
-          @change=${(e: Event) =>
-            this.table.filter(this.name, (e.target as HTMLInputElement).value)}
-        >
+        <slot name="filter">
           <div class="filter-input">
-            <input type="text" />
+            <input
+              type="text"
+              @change=${(e: Event) =>
+                this.table.filter(
+                  this.name,
+                  (e.target as HTMLInputElement).value,
+                )}
+            />
           </div>
         </slot>
       </div>
