@@ -9,3 +9,9 @@ export { registerTheme } from './styles/theme.styles.js';
 
 export * from './lib/events.js';
 export * from './types.js';
+export * from './components/Table/Table.js';
+export * from './components/Column/Column.js';
+export * from './components/Row/Row.js';
+export * from './components/Cell/Cell.js';
+export * from './components/ProgressBar/ProgressBar.js';
+export * from './components/Spinner/Spinner.js';
