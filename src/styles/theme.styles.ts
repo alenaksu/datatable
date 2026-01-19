@@ -96,6 +96,7 @@ export const registerTheme = () => {
       /* Table */
       --dt-table-background: var(--dt-color-neutral-50);
       --dt-table-color: var(--dt-color-neutral-900);
+      --dt-table-min-height: 15rem;
 
       /* Pagination */
       --dt-table-pagination-gap: var(--dt-spacing-xl);
@@ -141,7 +142,7 @@ export const registerTheme = () => {
       --dt-progress-bar-color: var(--dt-color-primary-500);
       --dt-progress-bar-background: var(--dt-neutral-200);
       --dt-progress-bar-height: 4px;
-      --dt-progress-bar-width: 70%;
+      --dt-progress-bar-width: 80%;
 
       /* Spinner */
       --dt-spinner-size: 48px;

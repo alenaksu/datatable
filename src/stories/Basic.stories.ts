@@ -26,7 +26,6 @@ const meta = {
         ?pagination="${pagination}"
         @pagechange="${handlePageChange}"
         totalItems="${data.length}"
-        style="height: 400px"
       >
         <dt-column>Name</dt-column>
         <dt-column>Position</dt-column>

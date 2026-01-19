@@ -8,6 +8,7 @@ export default css`
 
     color: var(--dt-table-color);
     background-color: var(--dt-table-background);
+    min-height: var(--dt-table-min-height);
   }
 
   .container {
@@ -30,12 +31,14 @@ export default css`
 
     /* end with shadow pushing out right */
     10% {
-      box-shadow: 0 3px 5px -2px hsl(220 40% 2% / calc(10% + 3%)),
+      box-shadow:
+        0 3px 5px -2px hsl(220 40% 2% / calc(10% + 3%)),
         0 7px 14px -5px hsl(220 40% 2% / calc(10% + 5%));
     }
 
     100% {
-      box-shadow: 0 3px 5px -2px hsl(220 40% 2% / calc(10% + 3%)),
+      box-shadow:
+        0 3px 5px -2px hsl(220 40% 2% / calc(10% + 3%)),
         0 7px 14px -5px hsl(220 40% 2% / calc(10% + 5%));
     }
   }
@@ -106,16 +109,16 @@ export default css`
   }
 
   .s-loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background-color: color-mix(in oklab, var(--dt-table-background), transparent 50%);
-  } 
+    background-color: color-mix(
+      in oklab,
+      var(--dt-table-background),
+      transparent 50%
+    );
+  }
 
   @keyframes rotation {
     0% {
