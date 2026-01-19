@@ -178,12 +178,11 @@ export class Table extends LitElement {
             >
             ${map(
               [5, 10, 25, 100],
-              (n) =>
-                html`
-                  <option ?selected=${this.perPage === n} value="${n}">
-                    ${n}
-                  </option>
-                `,
+              (n) => html`
+                <option ?selected=${this.perPage === n} value="${n}">
+                  ${n}
+                </option>
+              `,
             )}
             </select>
           </label>
@@ -229,6 +228,15 @@ export class Table extends LitElement {
       <div class="filters"></div>
 
       <div class="container">
+        ${when(
+          this.querySelector(`:scope > [slot="caption"]`) !== null,
+          () => html`
+            <div class="caption" part="caption">
+              <slot name="caption"></slot>
+            </div>
+          `,
+        )}
+
         <div
           class="${classMap({
             table: true,
@@ -249,11 +257,10 @@ export class Table extends LitElement {
         </div>
 
         ${when(
-          this.isEmpty ||
-            this.querySelector(`:scope > [slot="caption"]`) !== null,
+          !this.loading && this.isEmpty,
           () => html`
-            <div class="caption" part="caption">
-              <slot name="caption"> No data available </slot>
+            <div class="caption" part="empty-message">
+              <slot name="empty-message">No data available</slot>
             </div>
           `,
         )}
